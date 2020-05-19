@@ -1,5 +1,6 @@
 import { ICowOptions, TAction, IFormCowsayOptions } from './cowsay'
 import { sos } from '../../common/sos/sos-sidecar'
+import { apiRequest } from '../../common/request/apiRequest-sidecar'
 
 const host = '/api'
 
@@ -157,11 +158,11 @@ export async function fetchCow(key: string) {
 }
 
 export async function fetchHistory() {
-  // return await apiRequest.post<any>(host + '/cows/history/', {}, (rs) => {
-  //   getSos().change((ds) => {
-  //     ds.requestGetHistory = rs
-  //   })
-  // })
+  return await apiRequest.post<any>('/api/cows/history', {}, (rs) => {
+    getSos().change((ds) => {
+      ds.requestGetHistory = rs
+    })
+  })
 }
 
 export function setState(changes: Partial<IStateCowsay>) {

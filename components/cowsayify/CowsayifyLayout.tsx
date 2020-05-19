@@ -34,7 +34,9 @@ export const CowsayifyLayout = (props: { children: React.ReactNode }) => {
         {l.map(links, (c) => {
           return (
             <div className={classes.link} key={c.link}>
-              <Link href={'/' + c.link}>{c.text}</Link>
+              <Link href={'/' + c.link}>
+                <a>{c.text}</a>
+              </Link>
             </div>
           )
         })}
