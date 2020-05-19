@@ -1,7 +1,9 @@
 import React from 'react'
-import { DisplayCow, CowsayOptions } from '.'
-import { sosCowsay } from '@/state'
+
 import { CowsayifyLayout } from './CowsayifyLayout'
+import { sosCowsay } from '../state/sosCowsay-sidecar'
+import { CowsayOptions } from './CowsayOptions'
+import { DisplayCow } from './DisplayCow'
 
 export const CowsayPage = (props: any) => {
   return (

@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
 import * as React from 'react'
-import { CowsayifyAboutPage } from '../components/cowsayify/CowsayifyAboutPage'
+import { CowsayPage } from '../components/cowsayify/CowsayPage'
 
 const Page: NextPage = () => {
-  return <CowsayifyAboutPage />
+  return <CowsayPage />
 }
 
 export default Page

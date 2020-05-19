@@ -21,7 +21,7 @@ function Section(props: any) {
   return <div className={css.section}>{props.children}</div>
 }
 
-export function CowsayifyAboutPage(props: { data: any }) {
+export function CowsayifyAboutPage(props: {}) {
   return (
     <CowsayifyLayout>
       <CowsayifyAbout />
@@ -53,8 +53,8 @@ export const CowsayifyAbout = () => {
       <Section>
         Source available on github!
         <br />
-        <a href='https://github.com/bushmango/cowsayify-v3'>
-          https://github.com/bushmango/cowsayify-v3
+        <a href='https://github.com/bushmango/next-cowsayify'>
+          https://github.com/bushmango/next-cowsayify
         </a>
       </Section>
 
@@ -66,7 +66,7 @@ export const CowsayifyAbout = () => {
       <DisplayCow
         options={{
           text:
-            'Copyright 2018 Steve Bushman\nMIT License\nhttps://github.com/bushmango/cowsayify-v3',
+            'Copyright 2018 Steve Bushman\nMIT License\nhttps://github.com/bushmango/next-cowsayify',
           action: 'say',
         }}
       />
