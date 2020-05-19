@@ -2,4 +2,4 @@
 /* eslint-disable */
 /* tslint:disable */
 export const noop = () => {}
-export * from './CowsayRoutes'
+export * from './Icon'

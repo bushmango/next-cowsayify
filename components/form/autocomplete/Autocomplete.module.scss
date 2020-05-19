@@ -1,0 +1,74 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin noTextSelect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin focusHighlight() {
+  @include focusHighlightNormal();
+
+  &:focus {
+    @include focusHighlightFocused();
+  }
+}
+
+@mixin focusHighlightNormal() {
+  @include transition(box-shadow 0.25s ease);
+  outline: none;
+}
+@mixin focusHighlightFocused() {
+  @include transition(box-shadow 0.25s ease);
+  box-shadow: 0 0 3px #1955a6;
+}
+
+.suggestion {
+  font-size: 12px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.selectedSuggestion {
+  background-color: mix(white, #1955a6, 80%);
+}
+
+.suggestionList {
+  min-width: 50px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.container {
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #aaa;
+  border-radius: 3px;
+
+  @include focusHighlightNormal();
+
+  &.focused {
+    @include focusHighlightFocused();
+  }
+}
+
+.icon {
+  // color: #aaa;
+  font-size: 16px;
+  min-width: 15px;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 3px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+}

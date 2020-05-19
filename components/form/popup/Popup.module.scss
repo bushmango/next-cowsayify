@@ -1,0 +1,58 @@
+// https://gist.github.com/garyharan/957284
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow: inset $top $left $blur $color;
+    -moz-box-shadow: inset $top $left $blur $color;
+    box-shadow: inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+$border-radius: 3px;
+
+.popupContainer {
+  display: block;
+  position: relative;
+}
+
+.popup {
+  white-space: nowrap;
+
+  position: absolute;
+  border: solid 1px #ccc;
+  padding: 5px;
+  // margin: 5px;
+  background-color: white;
+  @include box-shadow(2px, 2px, 2px, #ccc, false);
+  z-index: 1000;
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s linear;
+  }
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.2s, opacity 0.2s linear;
+
+    &.noFadeOut {
+      transition: visibility 0s 0s;
+    }
+  }
+
+  &.inset {
+    padding: 0px;
+  }
+}
+
+.topLeftConnectedToBottomLeft {
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+}

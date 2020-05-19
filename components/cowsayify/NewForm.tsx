@@ -1,14 +1,10 @@
-import { FormInput, FormSelect, IFormData } from '@/common/components/form'
-import { IFormMetadataCollection } from '@/common/components/form/IFormMetadata'
-import {
-  modes,
-  actions,
-  IFormCowsayOptions,
-  cowsayOptionsFormMetadata,
-} from '@/state/cowsay'
-import React, { useState } from 'react'
-import { sosCowsay } from '@/state'
-import { FormCheckbox } from '@/common/components/form/FormCheckbox'
+import { sosCowsay } from '../state/sosCowsay-sidecar'
+import { IFormData } from '../form/IFormData'
+import { IFormCowsayOptions, cowsayOptionsFormMetadata } from '../state/cowsay'
+import { FormInput } from '../form/FormInput'
+import { FormCheckbox } from '../form/FormCheckbox'
+import { FormSelect } from '../form/FormSelect'
+import React from 'react'
 
 export const NewFormPage = (props: {}) => {
   const state = sosCowsay.useSubscribe()

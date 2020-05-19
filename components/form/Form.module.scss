@@ -1,0 +1,31 @@
+.stacked {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  .label {
+    font-size: 12px;
+    font-weight: normal;
+    color: #888;
+  }
+  .description {
+    font-size: 12px;
+    color: #888;
+  }
+  .control {
+    font-size: 12px;
+  }
+  .validation {
+    font-size: 12px;
+    color: rgb(126, 8, 8);
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  min-height: 23px;
+}
+.checkboxInput {
+  /*asd*/
+}

@@ -15,7 +15,7 @@ export interface IApiRequestState<T> {
 }
 
 export interface IStateCowsay {
-  // makeCowForm: IFormCowsayOptions
+  makeCowForm: IFormCowsayOptions
 
   cowList: string[]
 
@@ -32,14 +32,14 @@ export interface IStateCowsay {
 }
 
 let initialState: IStateCowsay = {
-  // makeCowForm: {
-  //   text: '',
-  //   mode: '',
-  //   eyes: '',
-  //   tongue: '',
-  //   action: 'say',
-  //   cow: 'default',
-  // },
+  makeCowForm: {
+    text: '',
+    mode: '',
+    eyes: '',
+    tongue: '',
+    action: 'say',
+    cow: 'default',
+  },
 
   cowList: [],
 
@@ -53,6 +53,16 @@ const getSos = sos.createLazySos<IStateCowsay>('sosCowsay', 1, () => ({
   requestSave: { default: {} },
   requestGetCow: { default: {} },
   requestGetHistory: { default: {} },
+  makeCowForm: {
+    default: {
+      text: '',
+      mode: '',
+      eyes: '',
+      tongue: '',
+      action: 'say',
+      cow: 'default',
+    },
+  },
 }))
 
 export const useSubscribe = sos.createUseSubscribe(getSos)
@@ -91,38 +101,36 @@ export async function doShare() {
 // Convert our internal options into cowsay-specific options
 export function calcOptions(): ICowOptions {
   let state = getSos().getState()
-  ///let { makeCowForm } = state
-  // let { text, mode } = makeCowForm
+  let { makeCowForm } = state
+  let { text, mode } = makeCowForm
 
-  let text = ''
   if (text.length === 0) {
     text = 'Moo'
   }
 
   let options: ICowOptions = {
     text,
-    action: 'T',
-    //action: makeCowForm.action,
+    action: makeCowForm.action,
   }
-  // if (makeCowForm.cow && makeCowForm.cow !== 'default') {
-  //   options.f = makeCowForm.cow
-  // }
-  // if (mode === 'custom') {
-  //   if (makeCowForm.eyes) {
-  //     options.e = makeCowForm.eyes
-  //     if (options.e.length === 1) {
-  //       options.e += ' '
-  //     }
-  //   }
-  //   if (makeCowForm.tongue) {
-  //     options.T = makeCowForm.tongue
-  //     if (options.T.length === 1) {
-  //       options.T += ' '
-  //     }
-  //   }
-  // } else if (mode) {
-  //   options[mode] = true
-  // }
+  if (makeCowForm.cow && makeCowForm.cow !== 'default') {
+    options.f = makeCowForm.cow
+  }
+  if (mode === 'custom') {
+    if (makeCowForm.eyes) {
+      options.e = makeCowForm.eyes
+      if (options.e.length === 1) {
+        options.e += ' '
+      }
+    }
+    if (makeCowForm.tongue) {
+      options.T = makeCowForm.tongue
+      if (options.T.length === 1) {
+        options.T += ' '
+      }
+    }
+  } else if (mode) {
+    options[mode] = true
+  }
   return options
 }
 
@@ -165,7 +173,7 @@ export function updateMakeCowForm(
   newVal: string,
 ) {
   // console.log('changes', field, newVal)
-  // getSos().change((ds) => {
-  //   ds.makeCowForm[field] = newVal
-  // })
+  getSos().change((ds) => {
+    ds.makeCowForm[field] = newVal
+  })
 }
