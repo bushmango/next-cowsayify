@@ -1,6 +1,8 @@
 import { ICowOptions, TAction, IFormCowsayOptions } from './cowsay'
 import { sos } from '../../common/sos/sos-sidecar'
 import { apiRequest } from '../../common/request/apiRequest-sidecar'
+import Router from 'next/router'
+const cowsay = require('cowsay-browser')
 
 const host = '/api'
 
@@ -68,35 +70,35 @@ const getSos = sos.createLazySos<IStateCowsay>('sosCowsay', 1, () => ({
 
 export const useSubscribe = sos.createUseSubscribe(getSos)
 
-// function init() {
-//   // Get our list of cows
-//   cowsay.list((err, result) => {
-//     if (!err) {
-//       stateManager.produce((draftState) => {
-//         draftState.cowList = result
-//       })
-//     }
-//   })
-// }
-// init()
+function init() {
+  // Get our list of cows
+  cowsay.list((err: any, result: any) => {
+    if (!err) {
+      getSos().change((ds) => {
+        ds.cowList = result
+      })
+    }
+  })
+}
+init()
 
 export async function doShare() {
-  // let options = calcOptions()
-  // let result = await apiRequest.post<any>(
-  //   host + '/cows/save',
-  //   {
-  //     options: JSON.stringify(options),
-  //   },
-  //   (rs) => {
-  //     stateManager.produce((ds) => {
-  //       ds.requestSave = rs
-  //     })
-  //   },
-  // )
-  // if (result.isSuccess) {
-  //   let hk = result.response.hk
-  //   navTo('/cowsaid/' + hk)
-  // }
+  let options = calcOptions()
+  let result = await apiRequest.post<any>(
+    '/api/cows/save',
+    {
+      options: JSON.stringify(options),
+    },
+    (rs) => {
+      getSos().change((ds) => {
+        ds.requestSave = rs
+      })
+    },
+  )
+  if (result.isSuccess) {
+    let hk = result.response.hk
+    Router.push('/cowsaid/' + hk)
+  }
 }
 
 // Convert our internal options into cowsay-specific options
@@ -130,7 +132,7 @@ export function calcOptions(): ICowOptions {
       }
     }
   } else if (mode) {
-    options[mode] = true
+    ;(options as any)[mode] = true
   }
   return options
 }
@@ -144,17 +146,17 @@ export async function prefetchCow(key: string) {
 }
 
 export async function fetchCow(key: string) {
-  // return await apiRequest.post<any>(
-  //   host + '/cows/get/',
-  //   {
-  //     hk: key,
-  //   },
-  //   (rs) => {
-  //     getSos().change((ds) => {
-  //       ds.requestGetCow = rs
-  //     })
-  //   },
-  // )
+  return await apiRequest.post<any>(
+    '/api/cows/get',
+    {
+      hk: key,
+    },
+    (rs) => {
+      getSos().change((ds) => {
+        ds.requestGetCow = rs
+      })
+    },
+  )
 }
 
 export async function fetchHistory() {
