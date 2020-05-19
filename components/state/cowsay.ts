@@ -1,3 +1,5 @@
+import { IFormMetadataCollection } from '../form/IFormMetadata'
+
 export type TAction = 'say' | 'think'
 
 export interface ISelectOption {

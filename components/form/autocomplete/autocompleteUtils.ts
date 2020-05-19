@@ -1,6 +1,5 @@
-import { _ } from '@/common/imports'
-
 import { ISelectOption } from '../select/ISelectOption'
+import _ from 'lodash'
 
 export const filter = (options: ISelectOption[], searchText: string) => {
   let suggestions: ISelectOption[] = []

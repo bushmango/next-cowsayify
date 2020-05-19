@@ -30,7 +30,7 @@ export const setGetDefaultParams = (getDefaultParams: () => any) => {
   _getDefaultParams = getDefaultParams
 }
 
-export async function request<T>(
+export async function request<T extends {}>(
   method: string,
   url: string,
   data?: any,
@@ -53,7 +53,7 @@ export async function request<T>(
     log('fetch', url)
   }
 
-  let r = createRequesting()
+  let r = createRequesting<T>()
   if (onProgress) {
     onProgress(r)
   }
@@ -72,19 +72,19 @@ export async function request<T>(
       let json = await result.json()
 
       if (json.error || json.isError) {
-        r = createError(r, json.error)
+        r = createError<T>(r, json.error)
         if (onProgress) {
           onProgress(r)
         }
       } else {
-        r = createSuccess(r, json)
+        r = createSuccess<T>(r, json)
         if (onProgress) {
           onProgress(r)
         }
       }
       return r
     } else {
-      r = createError(r, {
+      r = createError<T>(r, {
         isError: true,
         error: result.status,
         text: result.statusText,
@@ -96,7 +96,7 @@ export async function request<T>(
       return r
     }
   } catch (err) {
-    r = createError(r, err)
+    r = createError<T>(r, err)
     if (onProgress) {
       onProgress(r)
     }

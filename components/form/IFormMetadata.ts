@@ -1,4 +1,4 @@
-import { ISelectOption } from '../select/ISelectOption'
+import { ISelectOption } from '../state/cowsay'
 
 export interface IFormMetadata<T> {
   label?: string

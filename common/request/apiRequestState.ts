@@ -10,20 +10,20 @@ export interface IApiRequestState<T> {
   requestId?: number
 }
 
-export const createDefault = <T extends any>(): IApiRequestState<T> => {
+export const createDefault = <T extends {}>(): IApiRequestState<T> => {
   return {
     isFetching: false,
     requestId: 0,
   }
 }
-export const createRequesting = <T extends any>(): IApiRequestState<T> => {
+export const createRequesting = <T extends {}>(): IApiRequestState<T> => {
   return {
     isFetching: true,
     requestId: currentRequestId++,
     startTime: new Date().toISOString(),
   }
 }
-export const createSuccess = <T extends any>(
+export const createSuccess = <T extends { isSuccess?: boolean }>(
   request: IApiRequestState<T>,
   response: T,
 ): IApiRequestState<T> => {
