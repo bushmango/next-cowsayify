@@ -3,6 +3,7 @@ import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
 
 const news = [
+  'May 19, 2020\nUpdated and moved to NextJs / Vercel!',
   'Mar 04, 2019\nAdded immer and state management support!',
   'Feb 22, 2019\nAdded different cows!',
   'Feb 22, 2019\nAdded history',
