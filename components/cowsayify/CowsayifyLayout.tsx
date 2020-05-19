@@ -1,8 +1,9 @@
-import { RazLink } from '@/components/RazLink'
+import classesPrint from './Print.module.scss'
+import Link from 'next/link'
 import React from 'react'
+import { l } from '../../common/lodash/lodash'
 import classes from './CowsayifyLayout.module.scss'
-import classesPrint from '@/common/css/Print.module.scss'
-import { _ } from '@/common/imports'
+
 const links = [
   {
     link: 'make-the-cow-say-something',
@@ -30,10 +31,10 @@ export const CowsayifyLayout = (props: { children: React.ReactNode }) => {
   return (
     <div className={classesPrint.notPrintable}>
       <div className={classes.links}>
-        {_.map(links, (c) => {
+        {l.map(links, (c) => {
           return (
             <div className={classes.link} key={c.link}>
-              <RazLink to={'/' + c.link}>{c.text}</RazLink>
+              <Link href={'/' + c.link}>{c.text}</Link>
             </div>
           )
         })}

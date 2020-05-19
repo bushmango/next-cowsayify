@@ -1,11 +1,11 @@
-import styles from './CowsayifyHistoryPage.module.scss'
-
-import React, { useEffect } from 'react'
-import { _, DateTime } from '@/common/imports'
+import css from './CowsayifyHistoryPage.module.scss'
 import { CowsayifyLayout } from './CowsayifyLayout'
-import { sosCowsay } from '@/state'
-import { DisplayCow } from '.'
-import { Loader } from '@/common/components/loader'
+import { sosCowsay } from '../state/sosCowsay-sidecar'
+import { useEffect } from 'react'
+import l from 'lodash'
+import { DateTime } from 'luxon'
+import { DisplayCow } from './DisplayCow'
+import { Loader } from './Loader'
 
 interface IDataListItem {
   text: string
@@ -64,7 +64,7 @@ export const CowsayifyHistory = (props: { serverStateHistory?: any }) => {
     createdDateTime?: string
     options?: any
     //text?: string
-  }[] = _.map(requestGetHistory.response.result.Items, (c) => {
+  }[] = l.map(requestGetHistory.response.result.Items, (c) => {
     try {
       return {
         createdDateTime: c.createdDateTime || '',
@@ -75,16 +75,16 @@ export const CowsayifyHistory = (props: { serverStateHistory?: any }) => {
     }
   })
 
-  items = _.sortBy(items, ['createdDateTime']).reverse()
+  items = l.sortBy(items, ['createdDateTime']).reverse()
 
   return (
     <div>
       <h1>Messages sent with cowsayify</h1>
-      <div className={styles.pageHistory}>
-        {_.map(items, (c, cIdx) => (
+      <div className={css.pageHistory}>
+        {l.map(items, (c, cIdx) => (
           <div key={cIdx}>
             {/* item{c.text} {c.action} */}
-            <div className={styles.date}>
+            <div className={css.date}>
               {c.createdDateTime
                 ? DateTime.fromISO(c.createdDateTime).toLocaleString(
                     DateTime.DATETIME_MED,

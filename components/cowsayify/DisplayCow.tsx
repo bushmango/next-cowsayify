@@ -1,8 +1,9 @@
-import cowsay from 'cowsay-browser'
-import React from 'react'
+// import cowsay from 'cowsay-browser'
+const cowsay = require('cowsay-browser')
 
-import styles from './DisplayCow.module.scss'
-import { ICowOptions } from '@/state/cowsay'
+import React from 'react'
+import { ICowOptions } from '../state/cowsay'
+import css from './DisplayCow.module.scss'
 
 export const DisplayCow = (props: { options: ICowOptions }) => {
   let { options } = props
@@ -14,7 +15,7 @@ export const DisplayCow = (props: { options: ICowOptions }) => {
   }
 
   return (
-    <div className={styles.cowBox}>
+    <div className={css.cowBox}>
       <pre>
         {options.action === 'think'
           ? cowsay.think(options)

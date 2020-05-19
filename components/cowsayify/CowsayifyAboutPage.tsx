@@ -1,7 +1,7 @@
 import React from 'react'
-
-import styles from './CowsayifyAboutPage.module.scss'
-import { CowsayifyLayout, DisplayCow } from '.'
+import css from './CowsayifyAboutPage.module.scss'
+import { CowsayifyLayout } from './CowsayifyLayout'
+import { DisplayCow } from './DisplayCow'
 
 const keywords = [
   'serverless-api',
@@ -18,7 +18,7 @@ const keywords = [
 ]
 
 function Section(props: any) {
-  return <div className={styles.section}>{props.children}</div>
+  return <div className={css.section}>{props.children}</div>
 }
 
 export function CowsayifyAboutPage(props: { data: any }) {
@@ -45,7 +45,7 @@ export const CowsayifyAbout = () => {
         Demonstrates these technologies:
         <br />
         {keywords.map((c) => (
-          <div key={c} className={styles.keyword}>
+          <div key={c} className={css.keyword}>
             {c}
           </div>
         ))}

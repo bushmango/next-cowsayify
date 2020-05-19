@@ -1,0 +1,20 @@
+body {
+  -webkit-print-color-adjust: exact !important;
+}
+
+@media print {
+  .printable {
+    display: block;
+  }
+  .notPrintable {
+    display: none;
+  }
+}
+@media screen {
+  .printable {
+    display: block;
+  }
+  .notPrintable {
+    display: block;
+  }
+}

@@ -1,8 +1,7 @@
-import { getPrefetchedDataItem } from '@/App'
-import { sosCowsay } from '@/state'
-import React, { useEffect } from 'react'
-import { DisplayCow } from '.'
+import { useEffect } from 'react'
+import { sosCowsay } from '../state/sosCowsay-sidecar'
 import { CowsayifyLayout } from './CowsayifyLayout'
+import { DisplayCow } from './DisplayCow'
 
 export const CowsaidPage = (props: { hk: string }) => {
   return (
@@ -27,10 +26,10 @@ export const Cowsaid = (props: { hk: string }) => {
   let state = sosCowsay.useSubscribe()
   let data = state.requestGetCow.response
 
-  let prefetched = getPrefetchedDataItem('cowsaidPage')
-  if (prefetched && prefetched[hk]) {
-    data = prefetched[hk]
-  }
+  // let prefetched = getPrefetchedDataItem('cowsaidPage')
+  // if (prefetched && prefetched[hk]) {
+  //   data = prefetched[hk]
+  // }
 
   let options = null as any
   let text = ''
