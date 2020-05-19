@@ -7,11 +7,13 @@ import {
   IApiRequestState,
 } from './apiRequestState'
 import _ from 'lodash'
+import { browser } from '../browser/browser-sidecar'
+import { log } from '../log/log'
 
 export async function post<T>(
   url: string,
-  data: any,
-  onProgress: (r: IApiRequestState<T>) => void,
+  data?: any,
+  onProgress?: (r: IApiRequestState<T>) => void,
 ) {
   return request<T>('POST', url, data, onProgress)
 }
@@ -31,8 +33,8 @@ export const setGetDefaultParams = (getDefaultParams: () => any) => {
 export async function request<T>(
   method: string,
   url: string,
-  data: any,
-  onProgress: (r: IApiRequestState<T>) => void,
+  data?: any,
+  onProgress?: (r: IApiRequestState<T>) => void,
 ) {
   if (!url.startsWith('/api/')) {
     throw new Error(`url must start with /api/ ${url}`)
@@ -42,8 +44,19 @@ export async function request<T>(
   let path = url
   url = '/api/gateway?path' + path
 
+  if (!browser.documentExists) {
+    // Server
+    const host = process.env.FETCH_SERVER_HOST
+    url = host + url
+    console.log('server-fetch', url)
+  } else {
+    log('fetch', url)
+  }
+
   let r = createRequesting()
-  onProgress(r)
+  if (onProgress) {
+    onProgress(r)
+  }
 
   data = _.assign({}, _getDefaultParams() || {}, data, { path })
   try {
@@ -60,10 +73,14 @@ export async function request<T>(
 
       if (json.error || json.isError) {
         r = createError(r, json.error)
-        onProgress(r)
+        if (onProgress) {
+          onProgress(r)
+        }
       } else {
         r = createSuccess(r, json)
-        onProgress(r)
+        if (onProgress) {
+          onProgress(r)
+        }
       }
       return r
     } else {
@@ -73,12 +90,16 @@ export async function request<T>(
         text: result.statusText,
         errorType: 'server-request',
       })
-      onProgress(r)
+      if (onProgress) {
+        onProgress(r)
+      }
       return r
     }
   } catch (err) {
     r = createError(r, err)
-    onProgress(r)
+    if (onProgress) {
+      onProgress(r)
+    }
     return r
   }
 }

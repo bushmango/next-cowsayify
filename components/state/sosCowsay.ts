@@ -138,11 +138,7 @@ export function calcOptions(): ICowOptions {
 }
 
 export async function prefetchCow(key: string) {
-  // return await apiRequest.post<any>(
-  //   host + '/cows/get/',
-  //   { hk: key },
-  //   (rs) => {},
-  // )
+  return await apiRequest.post<any>(host + '/cows/get', { hk: key })
 }
 
 export async function fetchCow(key: string) {

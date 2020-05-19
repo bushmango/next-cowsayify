@@ -3,7 +3,7 @@ import { sosCowsay } from '../state/sosCowsay-sidecar'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
 
-export const CowsaidPage = (props: { hk: string }) => {
+export const CowsaidPage = (props: { hk: string; prefetched?: any }) => {
   return (
     <CowsayifyLayout>
       <Cowsaid {...props} />
@@ -16,30 +16,32 @@ export const CowsaidPage = (props: { hk: string }) => {
 //   return await minionCowsay.fetchCow(key)
 // }
 
-export const Cowsaid = (props: { hk: string }) => {
-  let { hk } = props
+export const Cowsaid = (props: { hk: string; prefetched?: any }) => {
+  let { hk, prefetched } = props
 
   useEffect(() => {
-    sosCowsay.fetchCow(hk)
+    if (!prefetched) {
+      sosCowsay.fetchCow(hk)
+    }
   }, [hk])
 
   let state = sosCowsay.useSubscribe()
   let data = state.requestGetCow.response
 
   // let prefetched = getPrefetchedDataItem('cowsaidPage')
-  // if (prefetched && prefetched[hk]) {
-  //   data = prefetched[hk]
-  // }
+  if (prefetched) {
+    // && prefetched[hk]) {
+    data = prefetched.response // [hk]
+  }
 
-  let options = null as any
+  let options = {} as any
   let text = ''
   if (data && data.item) {
     options = data.item.options
     options = JSON.parse(options || {})
   }
-  if (options) {
-    text = options.text
-  }
+
+  text = options.text || ''
 
   if (!text) {
     text = 'Moooo..?'
@@ -48,17 +50,13 @@ export const Cowsaid = (props: { hk: string }) => {
   if (state.requestGetCow.error) {
     text = '404 cow not found!'
     options = { d: true }
-    options.text = text
   } else if (state.requestGetCow.isFetching) {
     text = 'Loading...'
   } else if (!options) {
     text = 'Invalid cow!!'
     options = { d: true }
-    options.text = text
-  } else {
-    options = options
-    options.text = text
   }
 
+  options.text = text
   return <DisplayCow options={options} />
 }
