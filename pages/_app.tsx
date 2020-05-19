@@ -1,4 +1,4 @@
-import '../components/site/App.scss'
+import './App.scss'
 
 export default function MyApp(props: { Component: any; pageProps: any }) {
   let { Component, pageProps } = props
