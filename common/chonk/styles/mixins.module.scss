@@ -24,3 +24,12 @@
     color: darken($textColor, 30%);
   }
 }
+
+@mixin focus() {
+  &:focus {
+    //border: solid $thickness $color1;
+    //outline-color: transparent;
+    //outline-color: blue;
+    outline: 3px solid $highlightColor;
+  }
+}

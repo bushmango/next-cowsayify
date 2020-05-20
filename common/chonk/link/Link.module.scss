@@ -1,0 +1,7 @@
+@import './../styles/mixins.module.scss';
+@import './../styles/base.module.scss';
+
+.link {
+  margin: 5px;
+  @include focus();
+}

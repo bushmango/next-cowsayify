@@ -4,9 +4,15 @@ import { SectionTitle } from './SectionTitle'
 export const Section = (props: {
   label: string
   children?: React.ReactNode
+  inverted?: boolean
 }) => {
+  let className = css.section
+  if (props.inverted) {
+    className += ' ' + css.inverted
+  }
+
   return (
-    <div className={css.section}>
+    <div className={className}>
       <SectionTitle>{props.label}</SectionTitle>
 
       <div>{props.children}</div>

@@ -1,0 +1,33 @@
+@import './../styles/mixins.module.scss';
+@import './../styles/base.module.scss';
+
+// https://appitventures.com/styling-checkbox-css-tips/
+.label {
+  display: flex;
+  margin: 5px;
+  cursor: pointer;
+  input {
+    position: absolute;
+    display: hidden;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .checked,
+  .unchecked {
+    display: inline-block;
+    border: solid 2px $color1;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  .checked {
+    background-color: $color1;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+  .unchecked {
+    border: solid 2px $color1;
+  }
+}

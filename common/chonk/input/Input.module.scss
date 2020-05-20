@@ -1,0 +1,9 @@
+@import './../styles/mixins.module.scss';
+@import './../styles/base.module.scss';
+
+.input {
+  border: solid $thickness/2 $color1;
+  margin: $thickness/2;
+
+  @include focus();
+}

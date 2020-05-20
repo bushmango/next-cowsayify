@@ -1,12 +1,23 @@
 @import './../styles/base.module.scss';
 .section {
-  border-top: solid $thickness green;
+  border-top: solid $thickness $color1;
   padding-top: 5px;
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 10px;
 }
 
+$breakpoint-tablet: 768px;
+@media (min-width: $breakpoint-tablet) {
+  .section {
+    padding-left: 20%;
+  }
+}
+
+.inverted {
+  background-color: $color1;
+  color: white;
+}
 .sectionTitle {
   font-size: 20px;
 }

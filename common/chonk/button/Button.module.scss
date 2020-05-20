@@ -3,6 +3,7 @@
 
 .button {
   @include button(#ccc, black);
+  @include focus();
 
   border: solid $thickness $color1;
   border-radius: $squareRadius;
