@@ -8,6 +8,7 @@ import { Link } from '../link/Link'
 import { ChonkHeader } from '../section/ChonkHeader'
 import { Section } from '../section/Section'
 import { ISelectOption, Select } from '../select/Select'
+import { Banner } from '../banner/Banner'
 
 const options: ISelectOption[] = [
   {
@@ -46,6 +47,7 @@ export const ChonkExamplesPage = () => {
     <PageContainer>
       <ChonkHeader>Examples!</ChonkHeader>
 
+      <Banner label='Controls' />
       <Section label='Buttons'>
         <Button>a button</Button>
         <Button round>a rounded button</Button>
@@ -85,6 +87,7 @@ export const ChonkExamplesPage = () => {
         <Link>Wikipedia</Link>
       </Section>
 
+      <Banner label='Forms' />
       <Section label='Forms'>
         <FormItem label='Name'>
           <Input
