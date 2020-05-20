@@ -1,25 +1,45 @@
+import React from 'react'
 import { Button } from '../button/Button'
+import { Checkbox } from '../checkbox/Checkbox'
 import { PageContainer } from '../container/PageContainer'
-import { Section } from '../section/Section'
-import { ChonkHeader } from '../section/ChonkHeader'
+import { FormItem } from '../form-item/FormItem'
 import { Input } from '../input/Input'
 import { Link } from '../link/Link'
-import { FormItem } from '../form-item/FormItem'
-import { Checkbox } from '../checkbox/Checkbox'
-import { Select } from '../select/Select'
-import React from 'react'
-import { l } from '../../lodash/lodash'
+import { ChonkHeader } from '../section/ChonkHeader'
+import { Section } from '../section/Section'
+import { ISelectOption, Select } from '../select/Select'
+
+const options: ISelectOption[] = [
+  {
+    value: '1',
+  },
+  {
+    value: '2',
+    label: 'Two',
+  },
+  {
+    value: '3',
+  },
+  {
+    value: '4',
+    renderer: (val) => {
+      return <b>{val}!</b>
+    },
+  },
+  {
+    value: '5',
+  },
+]
 
 export const ChonkExamplesPage = () => {
   const [state, setState] = React.useState({
     isPuppy: false,
     isFish: true,
+    name: 'Steve',
+    interest: '2',
   })
   const update = (changes: any) => {
-    console.log('changes', changes)
-    let merged = l.merge({}, state, changes)
-    console.log('merged', merged)
-    setState(l.merge({}, state, changes))
+    setState(Object.assign({}, state, changes))
   }
 
   return (
@@ -53,7 +73,13 @@ export const ChonkExamplesPage = () => {
         </Checkbox>
       </Section>
       <Section label='Selects'>
-        <Select />
+        <Select
+          value={state.interest}
+          options={options}
+          onChange={(newVal) => {
+            update({ interest: newVal })
+          }}
+        />
       </Section>
       <Section label='Links'>
         <Link>Wikipedia</Link>
@@ -61,10 +87,33 @@ export const ChonkExamplesPage = () => {
 
       <Section label='Forms'>
         <FormItem label='Name'>
-          <Input />
+          <Input
+            value={state.name}
+            onChange={(newVal) => {
+              update({ name: newVal })
+            }}
+          />
         </FormItem>
-        <FormItem label='Are you a cat?'>Yes / No</FormItem>
-        <FormItem label='Interest level'>1 / 2 / 3 / 4 / 5</FormItem>
+        <div>Hello {state.name || 'Anonymous'}</div>
+        <FormItem label='Are you a puppy?'>
+          <Checkbox
+            checked={state.isPuppy}
+            onChange={(newVal) => {
+              update({ isPuppy: newVal })
+            }}
+          >
+            Are you a puppy?
+          </Checkbox>
+        </FormItem>
+        <FormItem label='Interest level'>
+          <Select
+            value={state.interest}
+            options={options}
+            onChange={(newVal) => {
+              update({ interest: newVal })
+            }}
+          />
+        </FormItem>
       </Section>
       <Section label='About' inverted={true}>
         About CHONK style

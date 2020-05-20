@@ -1,3 +1,24 @@
+@import './../styles/mixins.module.scss';
+@import './../styles/base.module.scss';
+
 .select {
   font-size: 10px;
+}
+.options {
+  border: solid 1px $color1;
+  border-bottom: none;
+  .option {
+    cursor: pointer;
+    border-bottom: solid 1px $color1;
+    &.selected {
+      outline: solid 2px lighten($color1, 10%);
+    }
+  }
+}
+
+.textInput {
+  border: solid $thickness/2 $color1;
+  margin: $thickness/2;
+
+  @include focus();
 }
