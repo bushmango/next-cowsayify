@@ -1,9 +1,11 @@
 @import './../styles/mixins.module.scss';
 @import './../styles/base.module.scss';
 
-.select {
-  font-size: 10px;
+.container {
+  position: relative;
+  display: inline-block;
 }
+
 .options {
   border: solid 1px $color1;
   border-bottom: none;
@@ -21,4 +23,17 @@
   margin: $thickness/2;
 
   @include focus();
+}
+
+// see: https://css-tricks.com/snippets/css/css-triangle/
+.arrow {
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid $color1;
+  cursor: pointer;
 }

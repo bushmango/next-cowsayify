@@ -1,7 +1,6 @@
 import React from 'react'
-
-import css from './Select.module.scss'
 import { l } from '../../lodash/lodash'
+import css from './Select.module.scss'
 
 export interface ISelectOption {
   value: string
@@ -14,11 +13,12 @@ export const Select = (props: {
   onChange?: (newVal: string) => void
 }) => {
   let [isOpen, setIsOpen] = React.useState(false)
-
-  let className = css.select
+  let [isCustomText, setIsCustomText] = React.useState(false)
 
   let selectedOption = l.find(props.options, (c) => c.value === props.value)
-
+  if (!selectedOption) {
+    selectedOption = l.find(props.options, (c) => c.label === props.value)
+  }
   // const getClosest = () => {
   //   l.forEach(props.options, c => {
   //     if(c.value)
@@ -26,17 +26,24 @@ export const Select = (props: {
   // }
 
   return (
-    <div>
+    <div className={css.container}>
       <input
         className={css.textInput}
-        value={props.value}
+        value={
+          selectedOption && !isCustomText
+            ? selectedOption.label || selectedOption.value
+            : props.value
+        }
+        onMouseDown={() => {
+          setIsOpen(!isOpen)
+        }}
         onKeyDown={(ev) => {
           if (ev.keyCode === 13) {
             // Enter
             setIsOpen(!isOpen)
+            setIsCustomText(false)
             ev.preventDefault()
-          }
-          if (ev.keyCode === 38) {
+          } else if (ev.keyCode === 38) {
             // Up
             ev.preventDefault()
             if (!isOpen) {
@@ -44,6 +51,7 @@ export const Select = (props: {
             }
             if (props.options) {
               if (props.onChange) {
+                setIsCustomText(false)
                 let lastOption = props.options[props.options.length - 1]
                 if (!selectedOption) {
                   if (lastOption) {
@@ -65,8 +73,7 @@ export const Select = (props: {
                 }
               }
             }
-          }
-          if (ev.keyCode === 40) {
+          } else if (ev.keyCode === 40) {
             // Down
             ev.preventDefault()
             if (!isOpen) {
@@ -74,6 +81,7 @@ export const Select = (props: {
             }
             if (props.options) {
               if (props.onChange) {
+                setIsCustomText(false)
                 let firstOption = props.options[0]
                 if (!selectedOption) {
                   if (firstOption) {
@@ -95,6 +103,8 @@ export const Select = (props: {
                 }
               }
             }
+          } else {
+            setIsCustomText(true)
           }
         }}
         onChange={(ev) => {
@@ -122,6 +132,7 @@ export const Select = (props: {
                 key={c.value}
                 onMouseDown={() => {
                   if (props.onChange) {
+                    setIsCustomText(false)
                     props.onChange(c.value)
                   }
                   setIsOpen(false)
@@ -133,11 +144,16 @@ export const Select = (props: {
           })}
         </div>
       )}
-
-      <select className={className}>
+      <div
+        className={css.arrow}
+        onClick={() => {
+          setIsOpen(!isOpen)
+        }}
+      />
+      {/* <select className={className}>
         <option>an option</option>
         <option>another option</option>
-      </select>
+      </select> */}
     </div>
   )
 }
