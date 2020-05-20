@@ -1,0 +1,11 @@
+@import './../styles/mixins.module.scss';
+@import './../styles/base.module.scss';
+
+.pageContainer {
+  border: solid $thickness $color1;
+  border-radius: 0px;
+  // padding: 5px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  //margin: 5px;
+}

@@ -1,26 +1,19 @@
 import { Button } from '../button/Button'
-
-export const Section = (props: {
-  label: string
-  children?: React.ReactNode
-}) => {
-  return (
-    <div>
-      <div>Section: {props.label}</div>
-
-      <div>{props.children}</div>
-    </div>
-  )
-}
+import { PageContainer } from '../container/PageContainer'
+import { Section } from '../section/Section'
 
 export const ChonkExamplesPage = () => {
   return (
-    <div>
+    <PageContainer>
       Examples!
       <Section label='Buttons'>
         <Button>a button</Button>
         <Button round>a rounded button</Button>
       </Section>
-    </div>
+      <Section label='Another section'>
+        <Button>a button</Button>
+        <Button round>a rounded button</Button>
+      </Section>
+    </PageContainer>
   )
 }

@@ -1,16 +1,15 @@
 @import './../styles/mixins.module.scss';
-
-$color1: green;
+@import './../styles/base.module.scss';
 
 .button {
   @include button(#ccc, black);
 
-  border: solid 5px $color1;
-  border-radius: 3px;
+  border: solid $thickness $color1;
+  border-radius: $squareRadius;
   padding: 5px;
   margin: 5px;
 
   &.round {
-    border-radius: 20px;
+    border-radius: $roundRadius;
   }
 }
