@@ -31,3 +31,6 @@
     border: solid 2px $color1;
   }
 }
+.focused {
+  outline: 3px solid $highlightColor;
+}
