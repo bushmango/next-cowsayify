@@ -1,4 +1,5 @@
 import css from './Section.module.scss'
+import { SectionTitle } from './SectionTitle'
 
 export const Section = (props: {
   label: string
@@ -6,7 +7,7 @@ export const Section = (props: {
 }) => {
   return (
     <div className={css.section}>
-      <div>Section: {props.label}</div>
+      <SectionTitle>{props.label}</SectionTitle>
 
       <div>{props.children}</div>
     </div>

@@ -6,3 +6,30 @@
   padding-right: 5px;
   padding-bottom: 10px;
 }
+
+.sectionTitle {
+  font-size: 20px;
+}
+
+.chonkHeader {
+  background-color: #ccc;
+  position: relative;
+  height: 60px;
+}
+.chonkHeaderShadow {
+  font-weight: bold;
+  color: #777;
+  font-size: 40px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+}
+.chonkHeaderPrimary {
+  font-weight: bold;
+  color: green;
+
+  font-size: 40px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
