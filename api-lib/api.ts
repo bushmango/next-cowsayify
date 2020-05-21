@@ -8,6 +8,8 @@ export function registerAll() {
   if (isRegistered) {
     return
   }
+  isRegistered = true
+
   console.log('registering api routes')
 
   AWS.config.update({
@@ -19,5 +21,4 @@ export function registerAll() {
   apiCowsGet.register()
   apiCowsHistory.register()
   apiCowsSave.register()
-  isRegistered = true
 }

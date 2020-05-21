@@ -9,6 +9,7 @@
 .options {
   border: solid 1px $color1;
   border-bottom: none;
+  min-width: 100px;
   .option {
     cursor: pointer;
     border-bottom: solid 1px $color1;

@@ -9,6 +9,7 @@ import { ChonkHeader } from '../section/ChonkHeader'
 import { Section } from '../section/Section'
 import { ISelectOption, Select } from '../select/Select'
 import { Banner } from '../banner/Banner'
+import { Tooltip } from '../tooltip/Tooltip'
 
 const options: ISelectOption[] = [
   {
@@ -86,7 +87,18 @@ export const ChonkExamplesPage = () => {
       <Section label='Links'>
         <Link>Wikipedia</Link>
       </Section>
-
+      <Section label='Tooltips'>
+        <div>
+          <Tooltip position='top' content={() => <div>Content 1!</div>}>
+            Mouse over me!
+          </Tooltip>
+        </div>
+        <div>
+          <Tooltip position='bottom' content={() => <div>Content 2!</div>}>
+            And me!
+          </Tooltip>
+        </div>
+      </Section>
       <Banner label='Forms' />
       <Section label='Forms'>
         <FormItem label='Name'>
