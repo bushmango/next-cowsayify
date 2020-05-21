@@ -10,6 +10,8 @@
   border: solid 1px $color1;
   border-bottom: none;
   min-width: 100px;
+  max-height: 30vh;
+  overflow-y: auto;
   .option {
     cursor: pointer;
     border-bottom: solid 1px $color1;
@@ -30,6 +32,7 @@
   position: absolute;
   top: 5px;
   left: 7px;
+  pointer-events: none;
 }
 
 // see: https://css-tricks.com/snippets/css/css-triangle/
