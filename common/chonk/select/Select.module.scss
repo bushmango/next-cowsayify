@@ -26,6 +26,12 @@
   @include focus();
 }
 
+.label {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+}
+
 // see: https://css-tricks.com/snippets/css/css-triangle/
 .arrow {
   position: absolute;

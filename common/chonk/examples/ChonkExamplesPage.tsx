@@ -32,13 +32,30 @@ const options: ISelectOption[] = [
     value: '5',
   },
 ]
-
+const optionsAWords: ISelectOption[] = [
+  {
+    value: 'Apples',
+  },
+  {
+    value: 'Aardvarks',
+  },
+  {
+    value: 'Avocados',
+  },
+  {
+    value: 'Apple Juice',
+  },
+  {
+    value: 'Anchovies',
+  },
+]
 export const ChonkExamplesPage = () => {
   const [state, setState] = React.useState({
     isPuppy: false,
     isFish: true,
     name: 'Steve',
     interest: '2',
+    aWord: 'Aardvark',
   })
   const update = (changes: any) => {
     setState(Object.assign({}, state, changes))
@@ -81,6 +98,22 @@ export const ChonkExamplesPage = () => {
           options={options}
           onChange={(newVal) => {
             update({ interest: newVal })
+          }}
+        />
+        <Select
+          allowText={true}
+          value={state.interest}
+          options={options}
+          onChange={(newVal) => {
+            update({ interest: newVal })
+          }}
+        />
+        <Select
+          allowText={true}
+          value={state.aWord}
+          options={optionsAWords}
+          onChange={(newVal) => {
+            update({ aWord: newVal })
           }}
         />
       </Section>

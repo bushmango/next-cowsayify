@@ -1,7 +1,7 @@
 import React from 'react'
 import { l } from '../../lodash/lodash'
-import css from './Select.module.scss'
 import { Popover } from '../popover/Popover'
+import css from './Select.module.scss'
 
 export interface ISelectOption {
   value: string
@@ -9,22 +9,41 @@ export interface ISelectOption {
   renderer?: (val: string) => React.ReactNode
 }
 export const Select = (props: {
+  allowText?: boolean
   value?: string
   options?: ISelectOption[]
   onChange?: (newVal: string) => void
 }) => {
   let [isOpen, setIsOpen] = React.useState(false)
-  let [isCustomText, setIsCustomText] = React.useState(false)
+  let [filterText, setFilterText] = React.useState(null as string | null)
+
+  let allowText = l.defaultTo(props.allowText, false)
 
   let selectedOption = l.find(props.options, (c) => c.value === props.value)
   if (!selectedOption) {
     selectedOption = l.find(props.options, (c) => c.label === props.value)
   }
-  // const getClosest = () => {
-  //   l.forEach(props.options, c => {
-  //     if(c.value)
-  //   })
-  // }
+
+  let textValue = ''
+  if (selectedOption) {
+    textValue = selectedOption.label || selectedOption.value
+  } else {
+    textValue = props.value || ''
+  }
+
+  let filteredOptions = props.options || []
+  if (filterText !== null) {
+    let filterTextLower = filterText.toLowerCase()
+    filteredOptions = l.filter(filteredOptions, (c) => {
+      if (c.label && c.label.toLowerCase().indexOf(filterTextLower) !== -1) {
+        return true
+      }
+      if (c.value && c.value.toLowerCase().indexOf(filterTextLower) !== -1) {
+        return true
+      }
+      return false
+    })
+  }
 
   return (
     <div className={css.container}>
@@ -33,11 +52,11 @@ export const Select = (props: {
         position='bottom'
         content={() => (
           <SelectMenu
-            options={props.options}
+            options={filteredOptions}
             selectedOption={selectedOption}
             onChange={(newVal) => {
               if (props.onChange) {
-                setIsCustomText(false)
+                setFilterText(null)
                 props.onChange(newVal)
               }
               setIsOpen(false)
@@ -46,12 +65,10 @@ export const Select = (props: {
         )}
       >
         <input
+          readOnly={!allowText}
           className={css.textInput}
-          value={
-            selectedOption && !isCustomText
-              ? selectedOption.label || selectedOption.value
-              : props.value
-          }
+          // value={textValue || ''}
+          value={filterText || ''}
           onMouseDown={() => {
             setIsOpen(!isOpen)
           }}
@@ -59,7 +76,7 @@ export const Select = (props: {
             if (ev.keyCode === 13) {
               // Enter
               setIsOpen(!isOpen)
-              setIsCustomText(false)
+              setFilterText(null)
               ev.preventDefault()
             } else if (ev.keyCode === 38) {
               // Up
@@ -69,20 +86,19 @@ export const Select = (props: {
               }
               if (props.options) {
                 if (props.onChange) {
-                  setIsCustomText(false)
-                  let lastOption = props.options[props.options.length - 1]
+                  let lastOption = filteredOptions[filteredOptions.length - 1]
                   if (!selectedOption) {
                     if (lastOption) {
                       props.onChange(lastOption.value)
                     }
                   } else {
                     let selectedOptionIndex = l.indexOf(
-                      props.options,
+                      filteredOptions,
                       selectedOption,
                     )
                     selectedOptionIndex -= 1
                     if (selectedOptionIndex >= 0) {
-                      props.onChange(props.options[selectedOptionIndex].value)
+                      props.onChange(filteredOptions[selectedOptionIndex].value)
                     } else {
                       if (lastOption) {
                         props.onChange(lastOption.value)
@@ -99,20 +115,19 @@ export const Select = (props: {
               }
               if (props.options) {
                 if (props.onChange) {
-                  setIsCustomText(false)
-                  let firstOption = props.options[0]
+                  let firstOption = filteredOptions[0]
                   if (!selectedOption) {
                     if (firstOption) {
                       props.onChange(firstOption.value)
                     }
                   } else {
                     let selectedOptionIndex = l.indexOf(
-                      props.options,
+                      filteredOptions,
                       selectedOption,
                     )
                     selectedOptionIndex += 1
-                    if (selectedOptionIndex < props.options.length) {
-                      props.onChange(props.options[selectedOptionIndex].value)
+                    if (selectedOptionIndex < filteredOptions.length) {
+                      props.onChange(filteredOptions[selectedOptionIndex].value)
                     } else {
                       if (firstOption) {
                         props.onChange(firstOption.value)
@@ -121,13 +136,13 @@ export const Select = (props: {
                   }
                 }
               }
-            } else {
-              setIsCustomText(true)
             }
           }}
           onChange={(ev) => {
             if (props.onChange) {
-              props.onChange(ev.target.value)
+              // props.onChange(ev.target.value)
+              setIsOpen(true)
+              setFilterText(ev.target.value)
             }
           }}
           onFocus={() => {
@@ -137,6 +152,7 @@ export const Select = (props: {
             setIsOpen(false)
           }}
         />
+        <div className={css.label}>{filterText === null && textValue}</div>
         <div
           className={css.arrow}
           onClick={() => {
@@ -171,10 +187,8 @@ export const SelectMenu = (props: {
             key={c.value}
             onMouseDown={() => {
               if (props.onChange) {
-                // setIsCustomText(false)
                 props.onChange(c.value)
               }
-              // setIsOpen(false)
             }}
           >
             {c.renderer ? c.renderer(c.value) : c.label || c.value}
@@ -184,31 +198,3 @@ export const SelectMenu = (props: {
     </div>
   )
 }
-
-// {
-//   isOpen && (
-//     <div className={css.options}>
-//       {l.map(props.options, (c) => {
-//         let selectedClass = ''
-//         if (c === selectedOption) {
-//           selectedClass = ' ' + css.selected
-//         }
-//         return (
-//           <div
-//             className={css.option + selectedClass}
-//             key={c.value}
-//             onMouseDown={() => {
-//               if (props.onChange) {
-//                 setIsCustomText(false)
-//                 props.onChange(c.value)
-//               }
-//               setIsOpen(false)
-//             }}
-//           >
-//             {c.renderer ? c.renderer(c.value) : c.label || c.value}
-//           </div>
-//         )
-//       })}
-//     </div>
-//   )
-// }
