@@ -10,6 +10,8 @@ import { Section } from '../section/Section'
 import { ISelectOption, Select } from '../select/Select'
 import { Banner } from '../banner/Banner'
 import { Tooltip } from '../tooltip/Tooltip'
+import { IMenuOption, Menu } from '../menu/Menu'
+import { Menu2 } from '../menu/Menu2'
 
 const options: ISelectOption[] = [
   {
@@ -33,6 +35,24 @@ const options: ISelectOption[] = [
   },
 ]
 const optionsAWords: ISelectOption[] = [
+  {
+    value: 'Apples',
+  },
+  {
+    value: 'Aardvarks',
+  },
+  {
+    value: 'Avocados',
+  },
+  {
+    value: 'Apple Juice',
+  },
+  {
+    value: 'Anchovies',
+  },
+]
+
+const optionsMenu: IMenuOption[] = [
   {
     value: 'Apples',
   },
@@ -76,6 +96,11 @@ export const ChonkExamplesPage = () => {
       <Section label='Buttons'>
         <Button>a button</Button>
         <Button round>a rounded button</Button>
+      </Section>
+      <Section label='Menu'>
+        <Menu2></Menu2>
+
+        <Menu options={optionsMenu}>Fruits</Menu>
       </Section>
       <Section label='Inputs'>
         <Input />
