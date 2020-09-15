@@ -7,6 +7,9 @@
 }
 
 .menuTop {
+
+  @include button(#ccc, black);
+
   cursor: pointer;
   border: solid $thickness/2 $color1;
   margin: $thickness/2;
@@ -16,14 +19,17 @@
   @include focus();
 }
 
-.options {
+.menuItems {
   border: solid 1px $color1;
   border-bottom: none;
   min-width: 100px;
   max-height: 30vh;
   overflow-y: auto;
 
-  .option {
+  .menuItem {
+
+    @include button(#ccc, black);
+
     cursor: pointer;
     border-bottom: solid 1px $color1;
 
@@ -31,25 +37,4 @@
       outline: solid 2px lighten($color1, 10%);
     }
   }
-}
-
-
-.label {
-  position: absolute;
-  top: 5px;
-  left: 7px;
-  pointer-events: none;
-}
-
-// see: https://css-tricks.com/snippets/css/css-triangle/
-.arrow {
-  position: absolute;
-  right: 10px;
-  top: 11px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid $color1;
-  cursor: pointer;
 }

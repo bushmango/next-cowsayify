@@ -1,4 +1,3 @@
-import { isoParse } from 'd3'
 import React from 'react'
 import { l } from '../../lodash/lodash'
 import { Popover } from '../popover/Popover'
@@ -92,12 +91,12 @@ export const Menu = (props: {
           <MenuItems
             options={options}
             selectedOption={selectedOption}
-            onChange={(newVal) => {
-              // if (props.onChange) {
-              //   props.onChange(newVal)
-              // }
-              doOpen(false)
-            }}
+            // onChange={(newVal) => {
+            //   // if (props.onChange) {
+            //   //   props.onChange(newVal)
+            //   // }
+            //   doOpen(false)
+            // }}
           />
         )}
       >
@@ -127,7 +126,7 @@ export const MenuItems = (props: {
   selectedOption?: IMenuOption
 }) => {
   return (
-    <div className={css.options}>
+    <div className={css.menuItems}>
       {l.map(props.options, (c) => {
         let selectedClass = ''
         if (c === props.selectedOption) {
@@ -135,7 +134,7 @@ export const MenuItems = (props: {
         }
         return (
           <div
-            className={css.option + selectedClass}
+            className={css.menuItem + selectedClass}
             key={c.value}
             onMouseDown={() => {
               // if (props.onChange) {
