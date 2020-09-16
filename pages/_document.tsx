@@ -1,11 +1,11 @@
 import React from 'react'
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { googleAnalytics } from '../common/google-analytics/googleAnalytics-sidecar'
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <html>
+      <Html>
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script async src={googleAnalytics.getScriptSrc()} />
@@ -23,7 +23,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }

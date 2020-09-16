@@ -12,6 +12,7 @@ import { Banner } from '../banner/Banner'
 import { Tooltip } from '../tooltip/Tooltip'
 import { IMenuOption, Menu } from '../menu/Menu'
 import { Menu2 } from '../menu/Menu2'
+import { ITabOption, TabItems, Tabs } from '../tab/Tabs'
 
 const options: ISelectOption[] = [
   {
@@ -70,6 +71,18 @@ const optionsMenu: IMenuOption[] = [
   },
 ]
 
+const optionsTabs: ITabOption[] = [
+  {
+    value: 'Apples',
+  },
+  {
+    value: 'Aardvarks',
+  },
+  {
+    value: 'Avocados',
+  },
+]
+
 const optionsLong: ISelectOption[] = []
 for (let i = 0; i < 100; i++) {
   optionsLong.push({ value: 'Item ' + (i + 1) })
@@ -102,6 +115,11 @@ export const ChonkExamplesPage = () => {
 
         <Menu options={optionsMenu}>Fruits</Menu>
       </Section>
+
+      <Section label='Tabs'>
+        <Tabs options={optionsTabs}>content?</Tabs>
+      </Section>
+
       <Section label='Inputs'>
         <Input />
         <Input />

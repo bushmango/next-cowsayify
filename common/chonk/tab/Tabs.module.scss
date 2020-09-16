@@ -1,0 +1,30 @@
+@import './../styles/mixins.module.scss';
+@import './../styles/base.module.scss';
+
+.tabsContainer {
+  display: block;
+}
+
+.tab {
+  border: solid 2px green;
+}
+
+.tabItems {
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(100px, 150px));
+
+  border-bottom: solid 2px green;
+
+}
+
+.tabItem {
+  display: block;
+  cursor: pointer;
+
+  @include button(#ccc, black);
+}
+
+.selected {
+  border: solid 2px green;
+}
