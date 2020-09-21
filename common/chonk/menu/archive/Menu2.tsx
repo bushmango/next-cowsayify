@@ -1,6 +1,6 @@
 import React from 'react'
-import { l } from '../../lodash/lodash'
-import { Popover } from '../popover/Popover'
+import { l } from '../../../lodash/lodash'
+import { Popover } from '../../popover/Popover'
 
 import css from './AriaMenu.module.scss'
 

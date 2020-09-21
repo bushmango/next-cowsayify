@@ -1,5 +1,6 @@
 import React from 'react'
-import { l } from '../../lodash/lodash'
+import { l } from '../../../lodash/lodash'
+
 import css from './Menu.module.scss'
 
 export interface IMenuSimpleOption {

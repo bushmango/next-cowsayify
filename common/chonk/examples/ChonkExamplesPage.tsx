@@ -11,7 +11,7 @@ import { ISelectOption, Select } from '../select/Select'
 import { Banner } from '../banner/Banner'
 import { Tooltip } from '../tooltip/Tooltip'
 import { IMenuOption, Menu } from '../menu/Menu'
-import { Menu2 } from '../menu/Menu2'
+import { Menu2 } from '../menu/archive/Menu2'
 import { ITabOption, TabItems, Tabs } from '../tab/Tabs'
 
 const options: ISelectOption[] = [
