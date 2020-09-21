@@ -11,20 +11,21 @@
 
 .tabItems {
   display: grid;
-
   grid-template-columns: repeat(5, minmax(100px, 150px));
-
   border-bottom: solid 2px green;
-
 }
 
 .tabItem {
   display: block;
   cursor: pointer;
+  padding: 2px 2px 0px 2px;
 
   @include button(#ccc, black);
 }
 
 .selected {
+  padding: 0 0 0 0;
   border: solid 2px green;
+  border-bottom: none;
+  font-weight: bold;
 }

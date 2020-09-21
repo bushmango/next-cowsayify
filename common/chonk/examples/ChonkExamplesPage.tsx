@@ -111,7 +111,7 @@ export const ChonkExamplesPage = () => {
         <Button round>a rounded button</Button>
       </Section>
       <Section label='Menu'>
-        <Menu2></Menu2>
+        {/* <Menu2></Menu2> */}
 
         <Menu options={optionsMenu}>Fruits</Menu>
       </Section>
