@@ -8,13 +8,17 @@ import { postAnonymouslyJson } from '../common/api-lib/apiUtil'
 export function register() {
   postAnonymouslyJson('/cows/get', async (req, _res) => {
     const hk = apiArguments.getRequiredArgumentString(req, 'hk')
-    let hkd = hk // decodeURIComponent(hk)
-
-    log('cows', 'get', hkd)
-    let result = await dynamo.get(razCowsay, hkd)
-    log('cows', 'get', hkd)
-    // logVerbose('cows', 'get', hkd, result)
-
-    return { isSuccess: true, item: result.Item }
+    return getCow(hk)
   })
+}
+
+export async function getCow(hk: string) {
+  let hkd = hk // decodeURIComponent(hk)
+
+  log('cows', 'get', hkd)
+  let result = await dynamo.get(razCowsay, hkd)
+  log('cows', 'get', hkd)
+  // logVerbose('cows', 'get', hkd, result)
+
+  return { isSuccess: true, item: result.Item || null }
 }
