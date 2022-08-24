@@ -18,6 +18,16 @@ export default class MyDocument extends Document {
             href='https://fonts.googleapis.com/css?family=Nunito&display=swap'
             rel='stylesheet'
           ></link>
+          <link rel='preconnect' href='https://fonts.googleapis.com'></link>
+          <link
+            rel='preconnect'
+            href='https://fonts.gstatic.com'
+            crossOrigin='anonymous'
+          ></link>
+          <link
+            href='https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'
+            rel='stylesheet'
+          ></link>
         </Head>
         <body>
           <Main />
