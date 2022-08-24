@@ -18,51 +18,55 @@ export const CowsaidPage = (props: { hk: string; prefetched?: any }) => {
 
 export const Cowsaid = (props: { hk: string; prefetched?: any }) => {
   let { hk, prefetched } = props
+  try {
+    const isPrefetched = prefetched && prefetched.isSuccess
 
-  const isPrefetched = prefetched && prefetched.isSuccess
+    useEffect(() => {
+      if (!isPrefetched) {
+        sosCowsay.fetchCow(hk)
+      }
+    }, [hk])
 
-  useEffect(() => {
-    if (!isPrefetched) {
-      sosCowsay.fetchCow(hk)
+    let state = sosCowsay.useSubscribe()
+    let data = state.requestGetCow.response
+
+    if (isPrefetched) {
+      data = prefetched
     }
-  }, [hk])
 
-  let state = sosCowsay.useSubscribe()
-  let data = state.requestGetCow.response
+    let options = {} as any
+    let text = ''
+    if (data && data.item) {
+      options = data.item.options
+      options = JSON.parse(options || {})
+    }
 
-  if (isPrefetched) {
-    data = prefetched
-  }
+    console.log('prefetched', prefetched, data)
 
-  let options = {} as any
-  let text = ''
-  if (data && data.item) {
-    options = data.item.options
-    options = JSON.parse(options || {})
-  }
+    text = options.text || ''
 
-  console.log('prefetched', prefetched, data)
+    if (!text) {
+      text = 'Moooo..?'
+      if (isPrefetched && !prefetched.item) {
+        text = '404 cow not found!'
+        options = { d: true }
+      }
+    }
 
-  text = options.text || ''
-
-  if (!text) {
-    text = 'Moooo..?'
-    if (isPrefetched && !prefetched.item) {
+    if (state.requestGetCow.error) {
       text = '404 cow not found!'
       options = { d: true }
+    } else if (state.requestGetCow.isFetching) {
+      text = 'Loading...'
+    } else if (!options) {
+      text = 'Invalid cow!!'
+      options = { d: true }
     }
-  }
 
-  if (state.requestGetCow.error) {
-    text = '404 cow not found!'
-    options = { d: true }
-  } else if (state.requestGetCow.isFetching) {
-    text = 'Loading...'
-  } else if (!options) {
-    text = 'Invalid cow!!'
-    options = { d: true }
+    options.text = text
+    return <DisplayCow options={options} />
+  } catch (err) {
+    console.error(err)
+    return <>Error</>
   }
-
-  options.text = text
-  return <DisplayCow options={options} />
 }

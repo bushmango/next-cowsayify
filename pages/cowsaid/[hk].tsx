@@ -7,10 +7,15 @@ import { GetServerSideProps } from 'next'
 import { apiCowsGet } from '../../api-lib/apiCowsGet-sidecar'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { hk } = context.params as any
-  let prefetched = await apiCowsGet.getCow(hk) // sosCowsay.prefetchCow(hk)
-  console.log('prefetched', prefetched)
-  return { props: { hk, prefetched } }
+  try {
+    const { hk } = context.params as any
+    let prefetched = await apiCowsGet.getCow(hk) // sosCowsay.prefetchCow(hk)
+    console.log('prefetched', prefetched)
+    return { props: { hk, prefetched } }
+  } catch (err) {
+    console.log(err)
+    return { props: { hk: 'err', prefetched: { isSucess: false, item: null } } }
+  }
 }
 
 const Page: NextPage = (props: {
@@ -18,9 +23,13 @@ const Page: NextPage = (props: {
   prefetched?: string
   children?: React.ReactNode
 }) => {
-  let router = useRouter()
-  const { hk } = router.query as any
-  return <CowsaidPage hk={hk} prefetched={props.prefetched} />
+  try {
+    let router = useRouter()
+    const { hk } = router.query as any
+    return <CowsaidPage hk={hk} prefetched={props.prefetched} />
+  } catch (err) {
+    return <>Page error</>
+  }
 }
 
 export default Page
