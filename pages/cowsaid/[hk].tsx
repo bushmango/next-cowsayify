@@ -14,7 +14,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { hk, prefetched } }
   } catch (err) {
     console.log(err)
-    return { props: { hk: 'err', prefetched: { isSucess: false, item: null } } }
+    return {
+      props: {
+        hk: 'err',
+        prefetched: {
+          isSucess: false,
+          item: { text: 'prefetch error ' + err },
+        },
+      },
+    }
   }
 }
 
