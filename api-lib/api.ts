@@ -12,13 +12,17 @@ export function registerAll() {
 
   console.log('registering api routes')
 
+  serverSideRenderRegister()
+
+  apiCowsGet.register()
+  apiCowsHistory.register()
+  apiCowsSave.register()
+}
+
+export function serverSideRenderRegister() {
   AWS.config.update({
     region: process.env.APP_AWS_REGION,
     accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY,
   })
-
-  apiCowsGet.register()
-  apiCowsHistory.register()
-  apiCowsSave.register()
 }

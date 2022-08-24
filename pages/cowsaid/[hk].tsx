@@ -5,10 +5,12 @@ import { CowsaidPage } from '../../components/cowsayify/CowsaidPage'
 
 import { GetServerSideProps } from 'next'
 import { apiCowsGet } from '../../api-lib/apiCowsGet-sidecar'
+import { serverSideRenderRegister } from '../../api-lib/api'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { hk } = context.params as any
+    serverSideRenderRegister()
     let prefetched = await apiCowsGet.getCow(hk) // sosCowsay.prefetchCow(hk)
     console.log('prefetched', prefetched)
     return { props: { hk, prefetched } }
