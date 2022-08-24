@@ -5,7 +5,7 @@ import { googleAnalytics } from '../common/google-analytics/googleAnalytics-side
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html className='h-full'>
+      <Html className='h-full bg-gray-100'>
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script async src={googleAnalytics.getScriptSrc()} />
