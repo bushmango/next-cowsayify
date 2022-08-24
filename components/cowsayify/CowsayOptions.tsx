@@ -17,6 +17,7 @@ import css from './CowsayOptions.module.scss'
 import { Panel } from '../form2/Panel'
 import { Select } from '../form2/Select'
 import { SelectOptions } from '../form2/SelectOptions'
+import { Input } from '../form2/Input'
 
 export const CowsayOptions = (props: { state: IStateCowsay }) => {
   const { state } = props
@@ -72,8 +73,26 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
 
           {state.makeCowForm.mode === 'custom' && (
             <>
-              <FormInput formData={formData} field='eyes' />
-              <FormInput formData={formData} field='tongue' />
+              <Input
+                maxLength={2}
+                id='eyes'
+                label='Eyes'
+                label2='i.e. **'
+                value={state.makeCowForm.eyes}
+                onChange={(ev) => {
+                  sosCowsay.updateMakeCowForm('eyes', ev.target.value)
+                }}
+              />
+              <Input
+                maxLength={2}
+                id='tongue'
+                label='Tongue'
+                label2='i.e. ()'
+                value={state.makeCowForm.tongue}
+                onChange={(ev) => {
+                  sosCowsay.updateMakeCowForm('tongue', ev.target.value)
+                }}
+              />
             </>
           )}
         </>

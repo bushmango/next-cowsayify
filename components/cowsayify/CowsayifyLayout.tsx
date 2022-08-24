@@ -15,6 +15,7 @@ export const CowsayifyLayout = (props: {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <CowsayifyHeader />
+
       <div className={classes.body}>{props.children}</div>
       {/* <div className={classesPrint.notPrintable}>
         <div className={classes.links}>
