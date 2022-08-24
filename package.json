@@ -31,7 +31,7 @@
     "@types/react-aria-menubutton": "6.2.9",
     "@types/victor": "^1.1.0",
     "@zeit/next-sass": "^1.0.1",
-    "aws-sdk": "^2.680.0",
+    "aws-sdk": "^2.814.0",
     "barrel-rider-sidecar": "1.1.7",
     "canvas": "2.9.3",
     "chroma-js": "2.4.2",
