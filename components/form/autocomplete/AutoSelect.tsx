@@ -19,8 +19,8 @@ export const AutoSelect = (props: {
   let { value } = props
 
   let options = standardizeSelectOptions(props.options)
-  let selected = _.find(options, (c: any) => c && c.value === value)
-  let selectedLabel = (selected && (selected.label || selected.value)) || ''
+  let selected = '' // _.find(options, (c: any) => c && c.value === value)
+  let selectedLabel = selected || '' // (selected && (selected.label || selected.value)) || ''
 
   const refInput = React.createRef<any>()
 

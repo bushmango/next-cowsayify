@@ -30,8 +30,8 @@ export const Autocomplete = (props: {
 }) => {
   let { value, maxOptionsToShow } = props
   let options = standardizeSelectOptions(props.options)
-  let selected = _.find(options, (c: any) => c && c.value === value)
-  let selectedLabel = (selected && selected.label) || ''
+  let selected = '' // _.find(options, (c: any) => c && c.value === value) as string
+  let selectedLabel: string = selected || ''
 
   let filter = props.filter || defaultFilter
 

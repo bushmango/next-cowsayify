@@ -28,7 +28,7 @@ export function FormCheckbox<T>(props: {
             }
           }}
         />
-        {m.label || l.startCase('' + field)}
+        {m.label || l.startCase('' + field.toString())}
       </label>
     </div>
   )
