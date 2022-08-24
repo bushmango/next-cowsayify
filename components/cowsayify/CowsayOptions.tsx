@@ -66,7 +66,7 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
             options={modes}
             selected={state.makeCowForm.mode}
             onChange={(newValue) => {
-              console.log('newValue', newValue)
+              // console.log('newValue', newValue)
               sosCowsay.updateMakeCowForm('mode', newValue)
             }}
           />

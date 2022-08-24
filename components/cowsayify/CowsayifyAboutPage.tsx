@@ -15,6 +15,7 @@ const keywords = [
   'typescript',
   'server-side-rendering',
   'sass',
+  'tailwindcss',
 ]
 
 function Section(props: any) {
@@ -65,8 +66,7 @@ export const CowsayifyAbout = () => {
 
       <DisplayCow
         options={{
-          text:
-            'Copyright 2018 Steve Bushman\nMIT License\nhttps://github.com/bushmango/next-cowsayify',
+          text: 'Copyright 2018 Steve Bushman\nMIT License\nhttps://github.com/bushmango/next-cowsayify',
           action: 'say',
         }}
       />
