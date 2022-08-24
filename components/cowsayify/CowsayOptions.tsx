@@ -4,79 +4,19 @@ import { FormCheckbox } from '../form/FormCheckbox'
 import { FormInput } from '../form/FormInput'
 import { FormSelect } from '../form/FormSelect'
 import { IFormData } from '../form/IFormData'
-import { cowsayOptionsFormMetadata, IFormCowsayOptions } from '../state/cowsay'
+import { Textarea } from '../form2/Textarea'
+import Toogle from '../form2/Toggle'
+import {
+  cowsayOptionsFormMetadata,
+  IFormCowsayOptions,
+  modes,
+} from '../state/cowsay'
 import { IStateCowsay } from '../state/sosCowsay'
 import { sosCowsay } from '../state/sosCowsay-sidecar'
 import css from './CowsayOptions.module.scss'
-import { Panel } from './Panel'
-
-export function Textarea(props: {
-  label?: string
-  value: string
-  onChange: (ev: ChangeEvent<HTMLTextAreaElement>) => void
-}) {
-  return (
-    <div>
-      <label
-        htmlFor='comment'
-        className='block text-sm font-medium text-gray-700'
-      >
-        {props.label}
-      </label>
-      <div className='mt-1'>
-        <textarea
-          onChange={props.onChange}
-          rows={4}
-          name='comment'
-          id='comment'
-          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
-          defaultValue={''}
-          value={props.value}
-        />
-      </div>
-    </div>
-  )
-}
-
-import { Switch } from '@headlessui/react'
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Toogle(props: {
-  children: React.ReactNode
-  isChecked: boolean
-  onChange: (isChecked: boolean) => void
-}) {
-  // const [enabled, setEnabled] = useState(false)
-
-  return (
-    <Switch.Group as='div' className='flex items-center'>
-      <Switch
-        checked={props.isChecked}
-        onChange={props.onChange}
-        className={classNames(
-          props.isChecked ? 'bg-indigo-600' : 'bg-gray-200',
-          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
-        )}
-      >
-        <span
-          aria-hidden='true'
-          className={classNames(
-            props.isChecked ? 'translate-x-5' : 'translate-x-0',
-            'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
-          )}
-        />
-      </Switch>
-      <Switch.Label as='span' className='ml-3'>
-        <span className='text-sm font-medium text-gray-900'>
-          {props.children}
-        </span>
-      </Switch.Label>
-    </Switch.Group>
-  )
-}
+import { Panel } from '../form2/Panel'
+import { Select } from '../form2/Select'
+import { SelectOptions } from '../form2/SelectOptions'
 
 export const CowsayOptions = (props: { state: IStateCowsay }) => {
   const { state } = props
@@ -108,6 +48,36 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
       >
         This is just a thought
       </Toogle>
+
+      <Select
+        label='Cow design'
+        options={state.cowList}
+        selected={state.makeCowForm.cow}
+        onChange={(newValue) => {
+          sosCowsay.updateMakeCowForm('cow', newValue)
+        }}
+      />
+
+      {state.makeCowForm.cow === 'default' && (
+        <>
+          <SelectOptions
+            label="Cow's MOOd"
+            options={modes}
+            selected={state.makeCowForm.mode}
+            onChange={(newValue) => {
+              console.log('newValue', newValue)
+              sosCowsay.updateMakeCowForm('mode', newValue)
+            }}
+          />
+
+          {state.makeCowForm.mode === 'custom' && (
+            <>
+              <FormInput formData={formData} field='eyes' />
+              <FormInput formData={formData} field='tongue' />
+            </>
+          )}
+        </>
+      )}
 
       <div className={css.cowForm}>
         <div className={css.cowFormRow}>
