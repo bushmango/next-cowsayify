@@ -7,7 +7,7 @@ import { DisplayCow } from './DisplayCow'
 
 export const CowsayPage = (props: any) => {
   return (
-    <CowsayifyLayout>
+    <CowsayifyLayout title='Make the cow say something'>
       <Cowsay />
     </CowsayifyLayout>
   )

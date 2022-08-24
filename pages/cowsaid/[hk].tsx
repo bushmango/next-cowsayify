@@ -4,12 +4,12 @@ import * as React from 'react'
 import { CowsaidPage } from '../../components/cowsayify/CowsaidPage'
 
 import { GetServerSideProps } from 'next'
-import { sosCowsay } from '../../components/state/sosCowsay-sidecar'
+import { apiCowsGet } from '../../api-lib/apiCowsGet-sidecar'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { hk } = context.params as any
-  let prefetched = await sosCowsay.prefetchCow(hk)
-  console.log(prefetched)
+  let prefetched = await apiCowsGet.getCow(hk) // sosCowsay.prefetchCow(hk)
+  console.log('prefetched', prefetched)
   return { props: { hk, prefetched } }
 }
 

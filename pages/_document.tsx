@@ -5,7 +5,7 @@ import { googleAnalytics } from '../common/google-analytics/googleAnalytics-side
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html className='h-full bg-gray-100'>
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script async src={googleAnalytics.getScriptSrc()} />
@@ -18,8 +18,18 @@ export default class MyDocument extends Document {
             href='https://fonts.googleapis.com/css?family=Nunito&display=swap'
             rel='stylesheet'
           ></link>
+          <link rel='preconnect' href='https://fonts.googleapis.com'></link>
+          <link
+            rel='preconnect'
+            href='https://fonts.gstatic.com'
+            crossOrigin='anonymous'
+          ></link>
+          <link
+            href='https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'
+            rel='stylesheet'
+          ></link>
         </Head>
-        <body>
+        <body className='h-full'>
           <Main />
           <NextScript />
         </body>

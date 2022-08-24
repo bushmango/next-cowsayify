@@ -19,8 +19,10 @@ export const CowsaidPage = (props: { hk: string; prefetched?: any }) => {
 export const Cowsaid = (props: { hk: string; prefetched?: any }) => {
   let { hk, prefetched } = props
 
+  const isPrefetched = prefetched && prefetched.isSuccess
+
   useEffect(() => {
-    if (!prefetched) {
+    if (!isPrefetched) {
       sosCowsay.fetchCow(hk)
     }
   }, [hk])
@@ -28,10 +30,8 @@ export const Cowsaid = (props: { hk: string; prefetched?: any }) => {
   let state = sosCowsay.useSubscribe()
   let data = state.requestGetCow.response
 
-  // let prefetched = getPrefetchedDataItem('cowsaidPage')
-  if (prefetched) {
-    // && prefetched[hk]) {
-    data = prefetched.response // [hk]
+  if (isPrefetched) {
+    data = prefetched
   }
 
   let options = {} as any
@@ -41,10 +41,16 @@ export const Cowsaid = (props: { hk: string; prefetched?: any }) => {
     options = JSON.parse(options || {})
   }
 
+  console.log('prefetched', prefetched, data)
+
   text = options.text || ''
 
   if (!text) {
     text = 'Moooo..?'
+    if (isPrefetched && !prefetched.item) {
+      text = '404 cow not found!'
+      options = { d: true }
+    }
   }
 
   if (state.requestGetCow.error) {

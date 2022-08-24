@@ -2,6 +2,7 @@ import * as l from 'lodash'
 import Head from 'next/head'
 import Link from 'next/link'
 import * as React from 'react'
+import { Header } from './Header'
 import css from './Layout.module.scss'
 import { links } from './links'
 
@@ -18,6 +19,7 @@ export const Layout = (props: { children: React.ReactNode; title: string }) => {
         ></link>
       </Head>
 
+      <Header />
       <div className={css.header}>
         {l.map(links, (c, cIdx) => (
           <React.Fragment key={cIdx}>
