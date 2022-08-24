@@ -1,11 +1,7 @@
-import classesPrint from './Print.module.scss'
-import Link from 'next/link'
-import React from 'react'
-import { l } from '../../common/lodash/lodash'
-import classes from './CowsayifyLayout.module.scss'
 import Head from 'next/head'
+import React from 'react'
 import { CowsayifyHeader } from './CowsayifyHeader'
-import { cowsayifyLinks } from './cowsayifyLinks'
+import classes from './CowsayifyLayout.module.scss'
 
 export const CowsayifyLayout = (props: {
   children: React.ReactNode
@@ -19,7 +15,8 @@ export const CowsayifyLayout = (props: {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <CowsayifyHeader />
-      <div className={classesPrint.notPrintable}>
+      <div className={classes.body}>{props.children}</div>
+      {/* <div className={classesPrint.notPrintable}>
         <div className={classes.links}>
           {l.map(cowsayifyLinks, (c) => {
             return (
@@ -33,7 +30,7 @@ export const CowsayifyLayout = (props: {
         </div>
         <hr />
         <div className={classes.body}>{props.children}</div>
-      </div>
+      </div> */}
     </>
   )
 }
