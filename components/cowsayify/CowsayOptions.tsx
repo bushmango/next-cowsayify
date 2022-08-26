@@ -23,6 +23,15 @@ export const Separator = () => {
   )
 }
 
+export const Constrainer = (props: { children: React.ReactNode }) => {
+  return (
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      {/* We've used 3xl here, but feel free to try other max-widths based on your needs */}
+      <div className='max-w-4xl mx-auto'>{props.children}</div>
+    </div>
+  )
+}
+
 export const CowsayOptions = (props: { state: IStateCowsay }) => {
   const { state } = props
 
@@ -54,7 +63,7 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
   modifiedCowList.sort((a, b) => (a.label || '')?.localeCompare(b.label || ''))
 
   return (
-    <div>
+    <Constrainer>
       <div className='mt-10 sm:mt-0'>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
           <div className='md:col-span-1'>
@@ -174,6 +183,6 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
       </div>
 
       <Separator />
-    </div>
+    </Constrainer>
   )
 }
