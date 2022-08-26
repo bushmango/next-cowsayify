@@ -34,6 +34,7 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
   let cowAction = state.makeCowForm.action === 'think' ? 'thinks' : 'says'
   let cowType =
     state.makeCowForm.cow === 'default' ? 'cow' : state.makeCowForm.cow
+  cowType = cowType.replace(/\-/g, ' ')
   let cowLine = `What the ${cowType} ${cowAction}`
 
   const modifiedCowList: ISelectOption[] = state.cowList.map((c) => {
@@ -44,11 +45,13 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
     if (label.length > 0) {
       label = label[0].toUpperCase() + label.substring(1)
     }
+    label = label.replace(/\-/g, ' ')
     return {
       value: c,
       label: label,
     }
   })
+  modifiedCowList.sort((a, b) => (a.label || '')?.localeCompare(b.label || ''))
 
   return (
     <div>
