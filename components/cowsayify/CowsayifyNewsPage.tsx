@@ -4,7 +4,7 @@ import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
 
 const news = [
-  'Aug 27, 2022\nAdd favicon, simplify code.',
+  'Aug 27, 2022\nAdd favicon, simplify code, bug fixes.',
   'Aug 26, 2022\nForm layout! Also better cowstructions.',
   'Aug 24, 2022\nUpdated and moving to Tailwindcss',
   'May 19, 2020\nUpdated and moved to NextJs / Vercel!',
