@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { Button } from '../form/button/Button'
+import { Button } from '../form2/button/Button'
 import { Input } from '../form2/Input'
 import { SelectOptions } from '../form2/SelectOptions'
 import { Textarea } from '../form2/Textarea'
