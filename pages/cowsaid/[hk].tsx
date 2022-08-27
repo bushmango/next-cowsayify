@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-const Page: NextPage = (props: {
+const Cowsaid_Hk: NextPage = (props: {
   hk?: string
   prefetched?: string
   children?: React.ReactNode
@@ -42,4 +42,4 @@ const Page: NextPage = (props: {
   }
 }
 
-export default Page
+export default Cowsaid_Hk
