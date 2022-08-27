@@ -4,6 +4,9 @@ import { CowsayifyLayout } from './CowsayifyLayout'
 import { sosCowsay } from '../state/sosCowsay-sidecar'
 import { CowsayOptions } from './CowsayOptions'
 import { DisplayCow } from './DisplayCow'
+import { useAtom } from 'jotai'
+import { cowOptionsAtom } from '../state/cowsay'
+import { CowListLoader } from './CowListLoader'
 
 export const CowsayPage = (props: any) => {
   return (
@@ -14,12 +17,12 @@ export const CowsayPage = (props: any) => {
 }
 
 export const Cowsay = (props: any) => {
-  const state = sosCowsay.useSubscribe()
-  let options = sosCowsay.calcOptions()
+  let [cowOptions] = useAtom(cowOptionsAtom)
+  let options = sosCowsay.calcOptions(cowOptions)
 
   return (
     <div>
-      <CowsayOptions state={state} />
+      <CowsayOptions />
       <DisplayCow options={options as any} />
     </div>
   )

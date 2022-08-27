@@ -64,7 +64,14 @@ export const Cowsaid = (props: { hk: string; prefetched?: any }) => {
     }
 
     options.text = text
-    return <DisplayCow options={options} />
+    return (
+      <>
+        <DisplayCow options={options} />
+        {/* <div className='flex justify-center text-gray-400 mt-10'>
+          Psst... share this link - {window.location.href}
+        </div> */}
+      </>
+    )
   } catch (err) {
     console.error(err)
     return <>Error</>

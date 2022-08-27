@@ -1,4 +1,4 @@
-import { IFormMetadataCollection } from '../form/IFormMetadata'
+import { atom } from 'jotai'
 
 export type TAction = 'say' | 'think'
 
@@ -86,19 +86,11 @@ export interface IFormCowsayOptions {
   cow: string
 }
 
-export const cowsayOptionsFormMetadata: IFormMetadataCollection<IFormCowsayOptions> = {
-  text: { label: 'What the cow says' },
-  action: {
-    label: 'This is just a thought',
-    options: actions,
-    trueValue: 'think',
-    falseValue: 'say',
-  },
-  mode: {
-    options: modes,
-    label: "Cow's MOOd",
-  },
-  eyes: { maxLength: 2, label: 'Custom Eyes', description: 'i.e. **' },
-  tongue: { maxLength: 2, label: 'Custom Tongue', description: 'i.e. ()' },
-  cow: { label: 'Cow design' },
-}
+export const cowOptionsAtom = atom<IFormCowsayOptions>({
+  text: 'Moo!',
+  action: '',
+  mode: '',
+  eyes: '**',
+  tongue: '()',
+  cow: 'default',
+})

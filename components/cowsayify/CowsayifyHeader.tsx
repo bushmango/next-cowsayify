@@ -49,16 +49,20 @@ export function CowsayifyHeader() {
                 <div className='flex justify-between h-16'>
                   <div className='flex'>
                     <div className='flex-shrink-0 flex items-center '>
-                      <img
-                        className='block lg:hidden h-16 w-auto rounded-lg'
-                        src='/images/cowsayify-logo.png'
-                        alt='Cow Logo'
-                      />
-                      <img
-                        className='hidden lg:block h-16 w-auto rounded-lg'
-                        src='/images/cowsayify-logo.png'
-                        alt='Cow Logo'
-                      />
+                      <Link href={'/'}>
+                        <a>
+                          <img
+                            className='block lg:hidden h-16 w-auto rounded-lg'
+                            src='/images/cowsayify-logo.png'
+                            alt='Cow Logo'
+                          />
+                          <img
+                            className='hidden lg:block h-16 w-auto rounded-lg'
+                            src='/images/cowsayify-logo.png'
+                            alt='Cow Logo'
+                          />
+                        </a>
+                      </Link>
                     </div>
                     <div className='hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8'>
                       {cowsayifyLinks.map((item) => {
