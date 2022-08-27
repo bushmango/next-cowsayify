@@ -8,6 +8,10 @@ export const cowsayifyLinks = [
     text: 'News',
   },
   {
+    href: '/fortune',
+    text: 'Fortune',
+  },
+  {
     href: '/cows',
     text: 'Cows',
   },

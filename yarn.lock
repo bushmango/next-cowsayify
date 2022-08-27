@@ -4555,6 +4555,11 @@ ramda@0.28.0:
   resolved "https://registry.npmjs.org/ramda/-/ramda-0.28.0.tgz"
   integrity sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==
 
+random-fortune@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/random-fortune/-/random-fortune-0.2.0.tgz#aa5f8ac41ea8af1666f82963502958e6852ce1e2"
+  integrity sha512-Tju5F+KHkPK50y9c6wLqTV1BWgoJ/0LxA3EHnjudjU1yF+2BOOfQ5D3y29U6ZMDwpL+B1XS0stM0Hw8TjDuJmw==
+
 range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz"
@@ -5992,6 +5997,11 @@ wrap-ansi@^7.0.0:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
+
+wrap-text@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/wrap-text/-/wrap-text-1.0.9.tgz#0b4d7ba2c5e45dc92d0fab63d5c479ab1aff1f1a"
+  integrity sha512-NWfjspSgMDXQIMpKM56AwCQPI01OMFRYYJBh6dGNCfH7AOl+j/VqqbiopgJ4VuQfSluqLc+2ekqaPNpYAGZ/Vg==
 
 wrappy@1:
   version "1.0.2"

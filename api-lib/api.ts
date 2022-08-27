@@ -2,6 +2,7 @@ import { apiCowsGet } from './apiCowsGet-sidecar'
 import { apiCowsHistory } from './apiCowsHistory-sidecar'
 import { apiCowsSave } from './apiCowsSave-sidecar'
 import AWS from 'aws-sdk'
+import { apiFortune } from './apiFortune-sidecar'
 
 let isRegistered = false
 export function registerAll() {
@@ -17,6 +18,7 @@ export function registerAll() {
   apiCowsGet.register()
   apiCowsHistory.register()
   apiCowsSave.register()
+  apiFortune.register()
 }
 
 export function serverSideRenderRegister() {
