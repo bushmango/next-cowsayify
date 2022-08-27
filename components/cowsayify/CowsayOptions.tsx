@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai'
+import { useState } from 'react'
 import { Button } from '../form2/button/Button'
 import { Input } from '../form2/Input'
 import { SelectOptions } from '../form2/SelectOptions'
@@ -38,6 +39,8 @@ export const Constrainer = (props: { children: React.ReactNode }) => {
 export const CowsayOptions = (props: {}) => {
   let [cowOptions, setCowOptions] = useAtom(cowOptionsAtom)
   let [cowList] = useAtom(cowListAtom)
+
+  let [isSharing, setIsSharing] = useState(false)
 
   const updateForm = (update: Partial<IFormCowsayOptions>) => {
     setCowOptions({ ...cowOptions, ...update })
@@ -162,11 +165,16 @@ export const CowsayOptions = (props: {}) => {
                 </div>
                 <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
                   <Button
+                    disabled={isSharing}
+                    spinning={isSharing}
                     onClick={() => {
-                      sosCowsay.doShare(cowOptions)
+                      if (!isSharing) {
+                        sosCowsay.doShare(cowOptions)
+                        setIsSharing(true)
+                      }
                     }}
                   >
-                    Share this Cow!
+                    {isSharing ? `Sharing ${cowType}...` : `Share ${cowType}`}
                   </Button>
                 </div>
               </div>

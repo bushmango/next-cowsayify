@@ -53,7 +53,7 @@ export async function doShare(formOptions: IFormCowsayOptions) {
   )
   if (result.isSuccess) {
     let hk = result.response.hk
-    Router.push('/cowsaid/' + hk)
+    Router.push('/cow/' + hk)
   }
 }
 

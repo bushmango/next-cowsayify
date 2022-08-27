@@ -1,4 +1,4 @@
-import { atomWithStorage } from 'jotai/utils'
+import { atom } from 'jotai'
 
 export type TAction = 'say' | 'think'
 
@@ -86,14 +86,11 @@ export interface IFormCowsayOptions {
   cow: string
 }
 
-export const cowOptionsAtom = atomWithStorage<IFormCowsayOptions>(
-  'cow-options',
-  {
-    text: 'Moo!',
-    action: '',
-    mode: '',
-    eyes: '**',
-    tongue: '()',
-    cow: 'default',
-  },
-)
+export const cowOptionsAtom = atom<IFormCowsayOptions>({
+  text: 'Moo!',
+  action: '',
+  mode: '',
+  eyes: '**',
+  tongue: '()',
+  cow: 'default',
+})

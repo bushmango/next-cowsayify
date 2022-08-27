@@ -1,9 +1,9 @@
-import { useAtom } from 'jotai'
-import { atomWithStorage } from 'jotai/utils'
+import { atom, useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { cowsay } from '../state/sosCowsay'
 
-export const cowListAtom = atomWithStorage<string[]>('cow-list', [])
+//export const cowListAtom = atomWithStorage<string[]>('cow-list', [])
+export const cowListAtom = atom<string[]>([])
 
 const namespace = 'cow-list-loader'
 export const CowListLoader = () => {
