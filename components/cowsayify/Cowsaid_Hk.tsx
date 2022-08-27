@@ -4,8 +4,9 @@ import * as React from 'react'
 import { CowsaidPage } from '../../components/cowsayify/CowsaidPage'
 
 import { GetServerSideProps } from 'next'
-import { serverSideRenderRegister } from '../../api-lib/api'
+
 import { apiCowsGet } from '../../api-lib/apiCowsGet-sidecar'
+import { serverSideRenderRegister } from '../../api-lib/serverSideRenderRegister'
 
 export const Cowsaid_Hk_getServerSideProps: GetServerSideProps = async (
   context,
