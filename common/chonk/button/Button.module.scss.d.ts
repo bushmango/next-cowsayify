@@ -1,2 +1,2 @@
-export const button: string;
-export const round: string;
+export const button: string
+export const round: string

@@ -1,2 +1,2 @@
-export const iconButton: string;
-export const inlineIcon: string;
+export const iconButton: string
+export const inlineIcon: string

@@ -1,2 +1,2 @@
-export const formItem: string;
-export const label: string;
+export const formItem: string
+export const label: string

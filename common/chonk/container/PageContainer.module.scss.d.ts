@@ -1,1 +1,1 @@
-export const pageContainer: string;
+export const pageContainer: string

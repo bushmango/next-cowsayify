@@ -1,2 +1,2 @@
-export const pageHistory: string;
-export const date: string;
+export const date: string
+export const pageHistory: string

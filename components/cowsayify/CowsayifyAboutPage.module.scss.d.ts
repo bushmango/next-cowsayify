@@ -1,2 +1,2 @@
-export const section: string;
-export const keyword: string;
+export const keyword: string
+export const section: string

@@ -1,2 +1,2 @@
-export const printable: string;
-export const notPrintable: string;
+export const notPrintable: string
+export const printable: string

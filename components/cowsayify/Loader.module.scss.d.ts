@@ -1,2 +1,2 @@
-export const infiniteLoader: string;
-export const infiniteLoaderBar: string;
+export const infiniteLoader: string
+export const infiniteLoaderBar: string

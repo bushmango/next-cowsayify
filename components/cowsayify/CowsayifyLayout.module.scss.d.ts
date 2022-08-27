@@ -1,3 +1,3 @@
-export const links: string;
-export const link: string;
-export const body: string;
+export const body: string
+export const link: string
+export const links: string
