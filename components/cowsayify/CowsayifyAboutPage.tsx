@@ -1,4 +1,5 @@
 import React from 'react'
+import { H1 } from '../form2/typography/Headers'
 import css from './CowsayifyAboutPage.module.scss'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
@@ -36,7 +37,7 @@ export function CowsayifyAboutPage(props: {}) {
 export const CowsayifyAbout = () => {
   return (
     <div>
-      <h1>About cowsayify</h1>
+      <H1>About cowsayify</H1>
       <Section>
         Originally made by Tony Monroe, cowsay is an iconic lunux command to
         send messages

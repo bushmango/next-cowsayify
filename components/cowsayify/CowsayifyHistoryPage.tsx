@@ -1,21 +1,22 @@
-import css from './CowsayifyHistoryPage.module.scss'
-import { CowsayifyLayout } from './CowsayifyLayout'
-import { sosCowsay } from '../state/sosCowsay-sidecar'
-import { useEffect } from 'react'
 import l from 'lodash'
 import { DateTime } from 'luxon'
+import { useEffect } from 'react'
+import { H1 } from '../form2/typography/Headers'
+import { sosCowsay } from '../state/sosCowsay-sidecar'
+import css from './CowsayifyHistoryPage.module.scss'
+import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
 import { Loader } from './Loader'
 
-interface IDataListItem {
-  text: string
-  action: string
-}
-interface IDataList {
-  Items: []
-  Count: number
-  ScannedCount: number
-}
+// interface IDataListItem {
+//   text: string
+//   action: string
+// }
+// interface IDataList {
+//   Items: []
+//   Count: number
+//   ScannedCount: number
+// }
 
 export const CowsayifyHistoryPage = (props: {
   fromServer?: boolean
@@ -23,7 +24,7 @@ export const CowsayifyHistoryPage = (props: {
 }) => {
   return (
     <CowsayifyLayout>
-      <CowsayifyHistory {...props} />
+      <CowsayifyHistoryContainer {...props} />
     </CowsayifyLayout>
   )
 }
@@ -36,6 +37,19 @@ export const CowsayifyHistoryPage = (props: {
 //   }
 // }
 
+export const CowsayifyHistoryContainer = (props: {
+  serverStateHistory?: any
+}) => {
+  return (
+    <div>
+      <H1>Messages sent with cowsayify</H1>
+      <div className={css.pageHistory}>
+        <CowsayifyHistory serverStateHistory={props.serverStateHistory} />
+      </div>
+    </div>
+  )
+}
+
 export const CowsayifyHistory = (props: { serverStateHistory?: any }) => {
   useEffect(() => {
     sosCowsay.fetchHistory()
@@ -45,11 +59,7 @@ export const CowsayifyHistory = (props: { serverStateHistory?: any }) => {
   let { requestGetHistory } = state
 
   if (!requestGetHistory || !requestGetHistory.response) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    )
+    return <Loader />
   } else if (requestGetHistory.error) {
     return <div>Error</div>
   }
@@ -72,24 +82,20 @@ export const CowsayifyHistory = (props: { serverStateHistory?: any }) => {
   items = l.sortBy(items, ['createdDateTime']).reverse()
 
   return (
-    <div>
-      <h1>Messages sent with cowsayify</h1>
-      <div className={css.pageHistory}>
-        {l.map(items, (c, cIdx) => (
-          <div key={cIdx}>
-            {/* item{c.text} {c.action} */}
-            <div className={css.date}>
-              {c.createdDateTime
-                ? DateTime.fromISO(c.createdDateTime).toLocaleString(
-                    DateTime.DATETIME_MED,
-                  )
-                : 'Before history'}
-            </div>
-            <DisplayCow options={c.options} />
+    <>
+      {l.map(items, (c, cIdx) => (
+        <div key={cIdx}>
+          {/* item{c.text} {c.action} */}
+          <div className={css.date}>
+            {c.createdDateTime
+              ? DateTime.fromISO(c.createdDateTime).toLocaleString(
+                  DateTime.DATETIME_MED,
+                )
+              : 'Before history'}
           </div>
-        ))}
-      </div>
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-    </div>
+          <DisplayCow options={c.options} />
+        </div>
+      ))}
+    </>
   )
 }

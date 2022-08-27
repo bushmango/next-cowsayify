@@ -4,6 +4,7 @@ import { Input } from '../form2/Input'
 import { SelectOptions } from '../form2/SelectOptions'
 import { Textarea } from '../form2/Textarea'
 import Toogle from '../form2/Toggle'
+import { H1, Subheader } from '../form2/typography/Headers'
 import {
   cowOptionsAtom,
   IFormCowsayOptions,
@@ -69,12 +70,8 @@ export const CowsayOptions = (props: {}) => {
         <div className='md:grid md:grid-cols-3 md:gap-6'>
           <div className='md:col-span-1'>
             <div className='px-4 sm:px-0'>
-              <h3 className='text-lg font-medium leading-6 text-gray-900'>
-                Control your cow
-              </h3>
-              <p className='mt-1 text-sm text-gray-600'>
-                Their destiny is in your hands.
-              </p>
+              <H1>Control your cow</H1>
+              <Subheader>Their destiny is in your hands.</Subheader>
             </div>
           </div>
           <div className='mt-5 md:mt-0 md:col-span-2'>

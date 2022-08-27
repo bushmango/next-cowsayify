@@ -1,4 +1,5 @@
 import React from 'react'
+import { H1 } from '../form2/typography/Headers'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
 
@@ -25,7 +26,7 @@ export const CowsayifyNewsPage = () => {
 export const CowsayifyNews = (props: any) => {
   return (
     <div>
-      <h1>Cowsayify news!</h1>
+      <H1>Cowsayify news!</H1>
       {news.map((newsItem, cIdx) => (
         <DisplayCow
           key={cIdx}
