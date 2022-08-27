@@ -16,6 +16,9 @@ const keywords = [
   'server-side-rendering',
   'sass',
   'tailwindcss',
+  'jotai',
+  'state-management',
+  'responsive-design',
 ]
 
 function Section(props: any) {

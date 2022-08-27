@@ -1,6 +1,6 @@
-import React from 'react'
+import { useAtom } from 'jotai'
 import { l } from '../../common/lodash/lodash'
-import { sosCowsay } from '../state/sosCowsay-sidecar'
+import { cowListAtom } from './CowListLoader'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'
 
@@ -13,13 +13,13 @@ export const CowsPage = () => {
 }
 
 export const Cows = () => {
-  const cowsay = sosCowsay.useSubscribe()
+  let [cowList] = useAtom(cowListAtom)
 
   return (
     <div>
       <h1>Cows</h1>
       <h2>These are the 'cows' you can use with cowsayify</h2>
-      {l.map(cowsay.cowList, (c) => (
+      {l.map(cowList, (c) => (
         <div key={c}>
           {/* <div> {c} </div> */}
           <div>

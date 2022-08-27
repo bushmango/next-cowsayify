@@ -1,17 +1,19 @@
+import { useAtom } from 'jotai'
 import { Button } from '../form/button/Button'
-import { IFormData } from '../form/IFormData'
 import { Input } from '../form2/Input'
 import { SelectOptions } from '../form2/SelectOptions'
 import { Textarea } from '../form2/Textarea'
 import Toogle from '../form2/Toggle'
 import {
-  cowsayOptionsFormMetadata,
+  cowOptionsAtom,
   IFormCowsayOptions,
   ISelectOption,
   modes,
 } from '../state/cowsay'
-import { IStateCowsay } from '../state/sosCowsay'
 import { sosCowsay } from '../state/sosCowsay-sidecar'
+import { cowListAtom } from './CowListLoader'
+
+const alwaysShowMOOd = true
 
 export const Separator = () => {
   return (
@@ -32,21 +34,20 @@ export const Constrainer = (props: { children: React.ReactNode }) => {
   )
 }
 
-export const CowsayOptions = (props: { state: IStateCowsay }) => {
-  const { state } = props
+export const CowsayOptions = (props: {}) => {
+  let [cowOptions, setCowOptions] = useAtom(cowOptionsAtom)
+  let [cowList] = useAtom(cowListAtom)
 
-  let formData: IFormData<IFormCowsayOptions> = {
-    form: state.makeCowForm,
-    metadata: cowsayOptionsFormMetadata,
-    onUpdateForm: sosCowsay.updateMakeCowForm,
+  const updateForm = (update: Partial<IFormCowsayOptions>) => {
+    setCowOptions({ ...cowOptions, ...update })
   }
-  let cowAction = state.makeCowForm.action === 'think' ? 'thinks' : 'says'
-  let cowType =
-    state.makeCowForm.cow === 'default' ? 'cow' : state.makeCowForm.cow
+
+  let cowAction = cowOptions.action === 'think' ? 'thinks' : 'says'
+  let cowType = cowOptions.cow === 'default' ? 'cow' : cowOptions.cow
   cowType = cowType.replace(/\-/g, ' ')
   let cowLine = `What the ${cowType} ${cowAction}`
 
-  const modifiedCowList: ISelectOption[] = state.cowList.map((c) => {
+  const modifiedCowList: ISelectOption[] = cowList.map((c) => {
     let label = c
     if (label === 'default') {
       label = 'cow'
@@ -85,28 +86,32 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
                       <SelectOptions
                         label='Cow type'
                         options={modifiedCowList}
-                        selected={state.makeCowForm.cow}
+                        selected={cowOptions.cow}
                         onChange={(newValue) => {
-                          sosCowsay.updateMakeCowForm('cow', newValue)
+                          updateForm({ cow: newValue })
                         }}
                       />
                     </div>
 
                     <div className='col-span-6 sm:col-span-3'>
-                      {state.makeCowForm.cow === 'default' && (
+                      {(alwaysShowMOOd || cowOptions.cow === 'default') && (
                         <SelectOptions
-                          label='MOOd'
+                          label={
+                            'MOOd' +
+                            (cowOptions.cow !== 'default'
+                              ? ' (only for some cows)'
+                              : '')
+                          }
                           options={modes}
-                          selected={state.makeCowForm.mode}
+                          selected={cowOptions.mode}
                           onChange={(newValue) => {
-                            // console.log('newValue', newValue)
-                            sosCowsay.updateMakeCowForm('mode', newValue)
+                            updateForm({ mode: newValue })
                           }}
                         />
                       )}
                     </div>
 
-                    {state.makeCowForm.mode === 'custom' && (
+                    {cowOptions.mode === 'custom' && (
                       <>
                         <div className='col-span-6 sm:col-span-3'>
                           <Input
@@ -114,12 +119,9 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
                             id='eyes'
                             label='Eyes'
                             label2='i.e. **'
-                            value={state.makeCowForm.eyes}
+                            value={cowOptions.eyes}
                             onChange={(ev) => {
-                              sosCowsay.updateMakeCowForm(
-                                'eyes',
-                                ev.target.value,
-                              )
+                              updateForm({ eyes: ev.target.value })
                             }}
                           />
                         </div>
@@ -130,12 +132,9 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
                             id='tongue'
                             label='Tongue'
                             label2='i.e. ()'
-                            value={state.makeCowForm.tongue}
+                            value={cowOptions.tongue}
                             onChange={(ev) => {
-                              sosCowsay.updateMakeCowForm(
-                                'tongue',
-                                ev.target.value,
-                              )
+                              updateForm({ tongue: ev.target.value })
                             }}
                           />
                         </div>
@@ -145,21 +144,18 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
                     <div className='col-span-6'>
                       <Textarea
                         onChange={(ev) => {
-                          sosCowsay.updateMakeCowForm('text', ev.target.value)
+                          updateForm({ text: ev.target.value })
                         }}
-                        value={state.makeCowForm.text}
+                        value={cowOptions.text}
                         label={cowLine}
                       />
                     </div>
 
                     <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
                       <Toogle
-                        isChecked={state.makeCowForm.action === 'think'}
+                        isChecked={cowOptions.action === 'think'}
                         onChange={(isChecked) => {
-                          sosCowsay.updateMakeCowForm(
-                            'action',
-                            isChecked ? 'think' : '',
-                          )
+                          updateForm({ action: isChecked ? 'think' : '' })
                         }}
                       >
                         This is just a thought
@@ -170,7 +166,7 @@ export const CowsayOptions = (props: { state: IStateCowsay }) => {
                 <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
                   <Button
                     onClick={() => {
-                      sosCowsay.doShare()
+                      sosCowsay.doShare(cowOptions)
                     }}
                   >
                     Share this Cow!

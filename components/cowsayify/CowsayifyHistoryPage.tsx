@@ -37,18 +37,12 @@ export const CowsayifyHistoryPage = (props: {
 // }
 
 export const CowsayifyHistory = (props: { serverStateHistory?: any }) => {
-  // minionHistory.rehydrate(props.serverStateHistory)
-  // const history = minionHistory.useSubscribe()
-  // let { fetchedHistory } = history
-
   useEffect(() => {
     sosCowsay.fetchHistory()
   }, [])
 
   const state = sosCowsay.useSubscribe()
   let { requestGetHistory } = state
-
-  // console.log('fetched history', requestGetHistory)
 
   if (!requestGetHistory || !requestGetHistory.response) {
     return (

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
+import { CowListLoader } from './CowListLoader'
 import { CowsayifyHeader } from './CowsayifyHeader'
 import classes from './CowsayifyLayout.module.scss'
 
@@ -15,6 +16,7 @@ export const CowsayifyLayout = (props: {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <CowsayifyHeader />
+      <CowListLoader />
 
       <div className={classes.body}>{props.children}</div>
       {/* <div className={classesPrint.notPrintable}>
