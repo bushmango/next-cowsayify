@@ -2,11 +2,12 @@ import { ChangeEvent } from 'react'
 
 export function Input(props: {
   label: string
-  label2: string
+  label2?: string
   id: string
   value: string
   onChange: (ev: ChangeEvent<HTMLInputElement>) => void
   maxLength?: number
+  autoFocus?: boolean
 }) {
   return (
     <div>
@@ -19,6 +20,7 @@ export function Input(props: {
       <div className='mt-1'>
         <input
           type='text'
+          autoFocus={props.autoFocus}
           maxLength={props.maxLength}
           // type='email'
           name={props.id}
@@ -30,9 +32,14 @@ export function Input(props: {
           onChange={props.onChange}
         />
       </div>
-      <p className='mt-2 text-sm text-gray-500' id={props.id + '-description'}>
-        {props.label2}
-      </p>
+      {props.label2 && (
+        <p
+          className='mt-2 text-sm text-gray-500'
+          id={props.id + '-description'}
+        >
+          {props.label2}
+        </p>
+      )}
     </div>
   )
 }
