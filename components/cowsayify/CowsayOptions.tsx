@@ -1,11 +1,11 @@
 import { useAtom } from 'jotai'
 import { useState } from 'react'
-import { Button } from '../form2/button/Button'
-import { Input } from '../form2/Input'
-import { SelectOptions } from '../form2/SelectOptions'
-import { Textarea } from '../form2/Textarea'
-import Toogle from '../form2/Toggle'
-import { H1, Subheader } from '../form2/typography/Headers'
+import { Button } from '../../next-core/form2/button/Button'
+import { Input } from '../../next-core/form2/Input'
+import { SelectOptions } from '../../next-core/form2/SelectOptions'
+import { Textarea } from '../../next-core/form2/Textarea'
+import Toogle from '../../next-core/form2/Toggle'
+import { H1, Subheader } from '../../next-core/form2/typography/Headers'
 import {
   cowOptionsAtom,
   IFormCowsayOptions,

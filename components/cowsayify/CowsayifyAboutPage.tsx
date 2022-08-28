@@ -1,5 +1,5 @@
 import React from 'react'
-import { H1 } from '../form2/typography/Headers'
+import { H1 } from '../../next-core/form2/typography/Headers'
 import css from './CowsayifyAboutPage.module.scss'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'

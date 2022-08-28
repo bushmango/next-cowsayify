@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { apiRequest } from '../../common/request/apiRequest-sidecar'
-import { Button } from '../form2/button/Button'
+import { Button } from '../../next-core/form2/button/Button'
 import { IApiRequestState } from '../state/sosCowsay'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'

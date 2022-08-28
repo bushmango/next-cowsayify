@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai'
 import { l } from '../../common/lodash/lodash'
-import { H1, Subheader } from '../form2/typography/Headers'
+import { H1, Subheader } from '../../next-core/form2/typography/Headers'
 import { cowListAtom } from './CowListLoader'
 import { CowsayifyLayout } from './CowsayifyLayout'
 import { DisplayCow } from './DisplayCow'

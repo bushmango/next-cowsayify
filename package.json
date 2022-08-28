@@ -2,12 +2,13 @@
   "name": "next-cowsayify",
   "version": "1.0.0",
   "scripts": {
+    "s": "yarn 1",
     "1": "yarn rimraf .next && yarn concurrently \"yarn dev\" \"yarn 2\" \"yarn sidecar\"",
     "2": "yarn css-watch",
     "sidecar": "yarn barrel-rider-sidecar --remove --watch --src components api-lib lib common",
     "css-watch": "npx typed-scss-modules  \"**/*.module.scss\" --ignore \"**/node_modules\" --watch",
     "css": "npx typed-scss-modules  \"**/*.module.scss\" --ignore \"**/node_modules\"",
-    "dev": "next -p 3001",
+    "dev": "next -p 3002",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc"

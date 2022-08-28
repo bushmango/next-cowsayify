@@ -1,7 +1,7 @@
 import l from 'lodash'
 import { DateTime } from 'luxon'
 import { useEffect } from 'react'
-import { H1 } from '../form2/typography/Headers'
+import { H1 } from '../../next-core/form2/typography/Headers'
 import { sosCowsay } from '../state/sosCowsay-sidecar'
 import css from './CowsayifyHistoryPage.module.scss'
 import { CowsayifyLayout } from './CowsayifyLayout'
