@@ -5,6 +5,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { cowsayifyLinks } from './cowsayifyLinks'
 import { NextRouter, useRouter } from 'next/router'
 import Link from 'next/link'
+import { DarkmodeToggle } from '../../next-core/form2/DarkmodeToggle'
 
 const user = {
   name: 'Tom Cook',
@@ -85,8 +86,12 @@ export function CowsayifyHeader() {
                         )
                       })}
                     </div>
+                    {/* <div className='hidden md:flex ml-3 items-center'>
+                      <DarkmodeToggle />
+                    </div> */}
                   </div>
-                  <div className='hidden sm:ml-6 sm:flex sm:items-center'>
+                  <div className='hidden md:ml-6 md:flex md:items-center'>
+                    <DarkmodeToggle />
                     {/* <button
                       type='button'
                       className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
