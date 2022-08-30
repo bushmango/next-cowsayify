@@ -9,7 +9,7 @@ export function Textarea(props: {
     <div>
       <label
         htmlFor='comment'
-        className='block text-sm font-medium text-gray-700'
+        className='block text-sm font-medium text-gray-700 dark:text-gray-300'
       >
         {props.label}
       </label>
@@ -19,7 +19,7 @@ export function Textarea(props: {
           rows={4}
           name='comment'
           id='comment'
-          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-800'
           value={props.value || ''}
         />
       </div>

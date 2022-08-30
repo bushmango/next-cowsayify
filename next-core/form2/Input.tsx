@@ -13,7 +13,7 @@ export function Input(props: {
     <div>
       <label
         htmlFor={props.id}
-        className='block text-sm font-medium text-gray-700'
+        className='block text-sm font-medium text-gray-700 dark:text-gray-300'
       >
         {props.label}
       </label>
@@ -25,7 +25,7 @@ export function Input(props: {
           // type='email'
           name={props.id}
           id={props.id}
-          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-800'
           // placeholder='you@example.com'
           aria-describedby={props.id + '-description'}
           value={props.value || ''}
@@ -34,7 +34,7 @@ export function Input(props: {
       </div>
       {props.label2 && (
         <p
-          className='mt-2 text-sm text-gray-500'
+          className='mt-2 text-sm text-gray-500 dark:text-gray-400'
           id={props.id + '-description'}
         >
           {props.label2}

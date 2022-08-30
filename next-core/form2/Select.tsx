@@ -14,7 +14,7 @@ export function Select(props: {
     <Listbox value={props.selected} onChange={props.onChange}>
       {({ open }) => (
         <>
-          <Listbox.Label className='block text-sm font-medium text-gray-700'>
+          <Listbox.Label className='block text-sm font-medium text-gray-700 dark:text-gray-300'>
             {props.label}
           </Listbox.Label>
           <div className='mt-1 relative'>
