@@ -71,10 +71,8 @@ export default class MyDocument extends Document {
           <GoogleAnalyticsTags />
           <GoogleFonts />
         </Head>
-        <body className='h-full'>
-          <Main />
-          <NextScript />
-        </body>
+        <Main />
+        <NextScript />
       </Html>
     )
   }

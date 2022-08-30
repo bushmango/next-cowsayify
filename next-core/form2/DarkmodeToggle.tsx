@@ -1,6 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { useState } from 'react'
 import { Switch } from '@headlessui/react'
+import { useNextjsAtomWithStorage } from '../util/jotaiNextjs'
+import { useAtom } from 'jotai'
+import { ClientOnly } from '../util/ClientOnly'
+
+export const darkmodeAtom = useNextjsAtomWithStorage('darkmode', false)
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -41,47 +46,49 @@ const MoonIcon = (props: { className: string }) => (
 )
 
 export function DarkmodeToggle() {
-  const [enabled, setEnabled] = useState(false)
+  const [enabled, setEnabled] = useAtom(darkmodeAtom)
 
   return (
-    <Switch
-      checked={enabled}
-      onChange={setEnabled}
-      className={classNames(
-        enabled ? 'bg-indigo-600' : 'bg-gray-200',
-        'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
-      )}
-    >
-      <span className='sr-only'>Use setting</span>
-      <span
+    <ClientOnly>
+      <Switch
+        checked={enabled}
+        onChange={setEnabled}
         className={classNames(
-          enabled ? 'translate-x-5' : 'translate-x-0',
-          'pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+          enabled ? 'bg-indigo-600' : 'bg-gray-200',
+          'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
         )}
       >
+        <span className='sr-only'>Use setting</span>
         <span
           className={classNames(
-            enabled
-              ? 'opacity-0 ease-out duration-100'
-              : 'opacity-100 ease-in duration-200',
-            'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity',
+            enabled ? 'translate-x-5' : 'translate-x-0',
+            'pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
           )}
-          aria-hidden='true'
         >
-          <SunIcon className='h-3 w-3 text-gray-400' />
+          <span
+            className={classNames(
+              enabled
+                ? 'opacity-0 ease-out duration-100'
+                : 'opacity-100 ease-in duration-200',
+              'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity',
+            )}
+            aria-hidden='true'
+          >
+            <SunIcon className='h-3 w-3 text-gray-400' />
+          </span>
+          <span
+            className={classNames(
+              enabled
+                ? 'opacity-100 ease-in duration-200'
+                : 'opacity-0 ease-out duration-100',
+              'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity',
+            )}
+            aria-hidden='true'
+          >
+            <MoonIcon className='h-3 w-3 text-indigo-600' />
+          </span>
         </span>
-        <span
-          className={classNames(
-            enabled
-              ? 'opacity-100 ease-in duration-200'
-              : 'opacity-0 ease-out duration-100',
-            'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity',
-          )}
-          aria-hidden='true'
-        >
-          <MoonIcon className='h-3 w-3 text-indigo-600' />
-        </span>
-      </span>
-    </Switch>
+      </Switch>
+    </ClientOnly>
   )
 }
